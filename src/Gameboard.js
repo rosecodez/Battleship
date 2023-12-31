@@ -1,7 +1,7 @@
 class Gameboard {
   constructor(row, col) {
     const shipsSunkArray = [];
-    const grid = new Array(row).fill(new Array(col).fill(0));
+    const grid = new Array(row).fill(0).map(() => new Array(col).fill(0));
     return grid;
   }
 
