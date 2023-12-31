@@ -1,8 +1,8 @@
+const Ship = require('./Ship');
+
 class Gameboard {
-  constructor(row, col) {
-    const shipsSunkArray = [];
-    const grid = new Array(row).fill(0).map(() => new Array(col).fill(0));
-    return grid;
+  constructor() {
+    this.grid = new Array(10).fill(0).map(() => new Array(10).fill(0));
   }
 
   // place ship at specific coordinates bt calling ship constructor
@@ -24,5 +24,5 @@ class Gameboard {
   }
 }
 module.exports = Gameboard;
-const testGameboard = new Gameboard(10, 10);
+const testGameboard = new Gameboard();
 console.log(testGameboard);

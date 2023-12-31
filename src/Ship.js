@@ -1,11 +1,13 @@
 class Ship {
-  constructor(length) {
+  constructor(length, position) {
     this.length = length;
     this.timesHit = 0;
+    this.position = position;
   }
 
   // each time ship gets a hit, increment value of timesHit
   hit() {
+    // eslint-disable-next-line no-plusplus
     return this.timesHit++;
   }
 
