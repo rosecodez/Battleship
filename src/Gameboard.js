@@ -32,6 +32,7 @@ class Gameboard {
     console.log(`missed shot is:${missedShot}`);
     this.missedShots.push(missedShot);
     console.log(this.missedShots);
+
     return this.grid;
   }
 
@@ -45,8 +46,9 @@ class Gameboard {
   }
 }
 module.exports = Gameboard;
-/* const newShip = new Ship(4);
+const newShip = new Ship(4);
 console.log(newShip);
 const testGameboard = new Gameboard();
 testGameboard.placeShip(newShip, [0, 0]);
-testGameboard.receiveAttack([6, 5]); */
+testGameboard.receiveAttack([6, 5]);
+testGameboard.receiveAttack([0, 0]);
