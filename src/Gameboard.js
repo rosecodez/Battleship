@@ -1,4 +1,5 @@
 /* eslint-disable no-plusplus */
+const { isObject } = require('lodash');
 const Ship = require('./Ship');
 
 class Gameboard {
@@ -6,7 +7,7 @@ class Gameboard {
     this.ships = [];
     this.shipsSunk = [];
     this.missedShots = [];
-    this.grid = new Array(10).fill(0).map(() => new Array(10).fill(0));
+    this.grid = new Array(10).fill(0).map(() => new Array(10).fill(null));
   }
 
   // place ship at specific coordinates by calling ship constructor
@@ -24,14 +25,20 @@ class Gameboard {
   // take a pair of coordinates, determine if ship has taken damage,
   // then sends the hit function to the correct ship, or
   // records the coordinates of the missed shot
-  receiveAttack(coordinates) {
+  receiveAttack(ship, coordinates) {
     const [x, y] = coordinates;
-    this.grid[x][y] = 'x';
 
-    const missedShot = coordinates;
-    console.log(`missed shot is:${missedShot}`);
-    this.missedShots.push(missedShot);
-    console.log(this.missedShots);
+    // if the square is null
+    if (this.grid[x][y] === null) {
+      // overwrite it with 'x'
+      this.grid[x][y] = 'x';
+      // add it to missed shots array
+      this.missedShots.push(this.grid[x][y]);
+      console.log(`missed shots array is:${this.missedShots}`);
+    } else {
+      // else hit that ship
+      ship.hit();
+    }
 
     return this.grid;
   }
@@ -46,9 +53,10 @@ class Gameboard {
   }
 }
 module.exports = Gameboard;
+
 const newShip = new Ship(4);
-console.log(newShip);
 const testGameboard = new Gameboard();
 testGameboard.placeShip(newShip, [0, 0]);
-testGameboard.receiveAttack([6, 5]);
-testGameboard.receiveAttack([0, 0]);
+testGameboard.receiveAttack(newShip, [0, 0]);
+testGameboard.receiveAttack(newShip, [9, 9]);
+console.log(testGameboard);
