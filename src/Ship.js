@@ -10,6 +10,13 @@ class Ship {
     return this.timesHit++;
   }
 
+  isHit() {
+    if (this.timesHit >= 0) {
+      return true;
+    }
+    return false;
+  }
+
   /* calculate whether a ship is considered sunk based on difference between length
   and the numbers of hits it has received */
   isSunk() {
