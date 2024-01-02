@@ -1,5 +1,5 @@
+/* eslint-disable no-console */
 /* eslint-disable no-plusplus */
-const { isObject } = require('lodash');
 const Ship = require('./Ship');
 
 class Gameboard {
@@ -27,7 +27,6 @@ class Gameboard {
   // records the coordinates of the missed shot
   receiveAttack(ship, coordinates) {
     const [x, y] = coordinates;
-
     // if the square is null
     if (this.grid[x][y] === null) {
       // overwrite it with 'x'
@@ -44,7 +43,7 @@ class Gameboard {
   }
 
   allSunk() {
-    if (shipsSunk.length === 0) {
+    if (this.shipsSunk.length === 0) {
       console.log('all ships were sunk');
       return true;
     }
