@@ -32,7 +32,7 @@ class Gameboard {
       // overwrite it with 'x'
       this.grid[x][y] = 'x';
       // add it to missed shots array
-      this.missedShots.push(this.grid[x][y]);
+      this.missedShots.push(coordinates);
       console.log(`missed shots array is:${this.missedShots}`);
     } else {
       // else hit that ship
