@@ -43,19 +43,7 @@ class Gameboard {
   }
 
   allSunk() {
-    if (this.shipsSunk.length === 0) {
-      console.log('all ships were sunk');
-      return true;
-    }
-    console.log('not all ships were sunk');
-    return false;
+    return this.ships.every((ship) => ship.isSunk());
   }
 }
 module.exports = Gameboard;
-
-const newShip = new Ship(4);
-const testGameboard = new Gameboard();
-testGameboard.placeShip(newShip, [0, 0]);
-testGameboard.receiveAttack(newShip, [0, 0]);
-testGameboard.receiveAttack(newShip, [9, 9]);
-console.log(testGameboard);

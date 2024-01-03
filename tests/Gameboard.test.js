@@ -27,3 +27,14 @@ test('receive attack on last square of the ship', () => {
   testGameboard.placeShip(newShip, [0, 0]);
   expect(testGameboard.receiveAttack(newShip, [0, 0])).toBeTruthy();
 });
+test('all ships on board sunk', () => {
+  const testGameboard = new Gameboard();
+  const newShip = new Ship(4);
+  testGameboard.placeShip(newShip, [0, 0]);
+  newShip.hit();
+  newShip.hit();
+  newShip.hit();
+  newShip.hit();
+  newShip.isSunk();
+  expect(testGameboard.allSunk()).toBeTruthy();
+});
