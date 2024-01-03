@@ -21,7 +21,7 @@ test('place a 4 square ship on first row', () => {
   expect(testGameboard.placeShip(newShip, [0, 0])).toBeTruthy();
 });
 
-test('receive attack on last square of the ship', () => {
+test('receive attack on first square of the ship', () => {
   const testGameboard = new Gameboard();
   const newShip = new Ship(4);
   testGameboard.placeShip(newShip, [0, 0]);
