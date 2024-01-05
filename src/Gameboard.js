@@ -11,14 +11,21 @@ class Gameboard {
   }
 
   // place ship at specific coordinates by calling ship constructor
-  placeShip(ship, coordinates) {
+  placeShip(ship, coordinates, direction) {
     const [x, y] = coordinates;
-
-    for (let i = 0; i < ship.length; i++) {
-      this.grid[x][y + i] = ship;
+    if (direction === 'vertical') {
+      console.log('vertical');
+      for (let i = 0; i < ship.length; i++) {
+        this.grid[y + i][x] = ship;
+      }
+      this.ships.push(ship);
+    } else {
+      console.log('horizontal');
+      for (let i = 0; i < ship.length; i++) {
+        this.grid[x][y + i] = ship;
+      }
+      this.ships.push(ship);
     }
-
-    this.ships.push(ship);
     return this.grid;
   }
 
@@ -47,3 +54,9 @@ class Gameboard {
   }
 }
 module.exports = Gameboard;
+
+const testGameboard = new Gameboard();
+const newShip = new Ship(4);
+testGameboard.placeShip(newShip, [0, 0], 'horizontal');
+testGameboard.placeShip(newShip, [6, 6], 'vertical');
+console.log(testGameboard);

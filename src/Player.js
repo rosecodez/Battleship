@@ -16,11 +16,11 @@ class Player {
   }
 }
 module.exports = Player;
+
 const testShip = new Ship(4);
+console.log(testShip);
 
 const john = new Player('John');
 console.log(john.grid);
 
 john.placeShip(testShip, [0, 0]);
-
-const ai = new Player('ai');
