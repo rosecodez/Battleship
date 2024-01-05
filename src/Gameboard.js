@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-plusplus */
+const { map } = require('lodash');
 const Ship = require('./Ship');
 
 class Gameboard {
@@ -57,6 +58,6 @@ module.exports = Gameboard;
 
 const testGameboard = new Gameboard();
 const newShip = new Ship(4);
+testGameboard.placeShip(newShip, [0, 0], 'vertical');
 testGameboard.placeShip(newShip, [0, 0], 'horizontal');
-testGameboard.placeShip(newShip, [6, 6], 'vertical');
 console.log(testGameboard);
