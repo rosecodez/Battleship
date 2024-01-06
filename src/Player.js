@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable max-classes-per-file */
 const Gameboard = require('./Gameboard');
 const Ship = require('./Ship');
 
@@ -15,13 +17,23 @@ class Player {
     return this.grid.placeShip(ship, coordinates, direction);
   }
 }
+class Ai extends Player {
+  getRandomChoice(ship, coordinates) {
+    const [x, y] = coordinates;
+    if (!this.isLegal(ship, this.grid[x][y])) {
+      console.log('its not a legal move');
+    }
+    console.log('legal move');
+    // code to get random choice
+  }
+}
 module.exports = Player;
 
 const testShip = new Ship(4);
 
-const john = new Player('John');
-
-john.placeShip(testShip, [0, 0], 'vertical');
-john.attack(testShip, [0, 0]);
-console.log(john.grid);
+const ai = new Ai('Ai');
+ai.placeShip(testShip, [0, 0], 'horizontal');
+ai.attack(testShip, [0, 0]);
+ai.getRandomChoice();
+console.log(ai.grid);
 console.log(testShip);
