@@ -10,7 +10,7 @@ test('create a 10x10 array board with null in each square', () => {
   expect(testGameboard.grid.every(Array.isArray)).toBe(true);
   // check if every child of grid has a length of 10
   expect(testGameboard.grid.every((array) => array.length === 10)).toBe(true);
-  // check if every element of every array in .grid is `0`
+  // check if every element of every array in .grid is `null`
   expect(testGameboard.grid.every((array) => array.every((element) => element === null))).toBe(true);
 });
 
@@ -27,6 +27,7 @@ test('receive attack on first square of the ship', () => {
   testGameboard.placeShip(newShip, [0, 0]);
   expect(testGameboard.receiveAttack(newShip, [0, 0])).toBeTruthy();
 });
+
 test('all ships on board sunk', () => {
   const testGameboard = new Gameboard();
   const newShip = new Ship(4);

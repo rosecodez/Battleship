@@ -35,10 +35,9 @@ class Gameboard {
   // records the coordinates of the missed shot
   receiveAttack(ship, coordinates) {
     const [x, y] = coordinates;
+    this.grid[x][y] = 'x';
     // if the square is null
     if (this.grid[x][y] === null) {
-      // overwrite it with 'x'
-      this.grid[x][y] = 'x';
       // add it to missed shots array
       this.missedShots.push(coordinates);
       console.log(`missed shots array is:${this.missedShots}`);
@@ -60,4 +59,5 @@ const testGameboard = new Gameboard();
 const newShip = new Ship(4);
 testGameboard.placeShip(newShip, [0, 0], 'vertical');
 testGameboard.placeShip(newShip, [0, 0], 'horizontal');
+testGameboard.receiveAttack(newShip, [0, 0]);
 console.log(testGameboard);
