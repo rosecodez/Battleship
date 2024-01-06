@@ -4,15 +4,16 @@ const Ship = require('./Ship');
 class Player {
   constructor(name) {
     this.name = name;
-    this.grid = new Gameboard();
   }
 
   attack(coordinates) {
+    this.grid = new Gameboard();
     return this.grid.receiveAttack(coordinates);
   }
 
-  placeShip(ship, coordinates) {
-    return this.grid.placeShip(ship, coordinates);
+  placeShip(ship, coordinates, direction) {
+    this.grid = new Gameboard();
+    return this.grid.placeShip(ship, coordinates, direction);
   }
 }
 module.exports = Player;
@@ -21,6 +22,6 @@ const testShip = new Ship(4);
 console.log(testShip);
 
 const john = new Player('John');
-console.log(john.grid);
 
-john.placeShip(testShip, [0, 0]);
+john.placeShip(testShip, [0, 0], 'vertical');
+console.log(john.grid);
