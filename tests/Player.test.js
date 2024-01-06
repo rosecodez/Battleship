@@ -18,3 +18,10 @@ test('john places a vertical ship on first square of the board ', () => {
   john.placeShip(testShip, [0, 0], 'vertical');
   expect(john.placeShip(testShip, [0, 0])).toBeTruthy();
 });
+test('attack johns ship', () => {
+  const john = new Player('John');
+  const testShip = new Ship(4);
+  john.placeShip(testShip, [0, 0], 'vertical');
+  john.attack(testShip, [0, 0]);
+  expect(john.attack(testShip, [0, 0])).toBeTruthy();
+});
