@@ -35,6 +35,7 @@ class Ai extends Player {
     const directionChoice = directions[Math.floor(Math.random() * directions.length)];
 
     this.placeShip(ship, coordinates, directionChoice);
+    return this.grid;
   }
 
   getRandomAttack() {
@@ -44,14 +45,9 @@ class Ai extends Player {
     const y = Math.floor(Math.random() * 9);
     const coordinates = [x, y];
     this.attack(ship, coordinates);
+    return this.grid;
   }
 }
 
 module.exports = Player;
 module.exports = Ai;
-
-const ai = new Ai('Ai');
-ai.getRandomPlace();
-ai.getRandomAttack();
-
-console.log(ai.grid);

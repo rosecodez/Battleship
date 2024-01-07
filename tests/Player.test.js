@@ -27,7 +27,13 @@ test('john attacks a square on board', () => {
   expect(john.attack(testShip, [0, 0])).toBeTruthy();
 });
 
-test('ai attacks a random square', () => {
+test('ai places a random ship on board ', () => {
+  const ai = new Ai('Ai');
+  ai.getRandomPlace();
+  expect(ai.getRandomPlace()).toBeTruthy();
+});
+
+test('ai attacks a random square on board ', () => {
   const ai = new Ai('Ai');
   ai.getRandomAttack();
   expect(ai.getRandomAttack()).toBeTruthy();
