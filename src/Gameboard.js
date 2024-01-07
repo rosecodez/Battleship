@@ -13,10 +13,8 @@ class Gameboard {
   isLegal(coordinates) {
     const [x, y] = coordinates;
     if (x >= 0 && x < 9 && y >= 0 && y < 9) {
-      console.log('move is on board');
       return true;
     }
-    console.log('move is not on board');
     return false;
   }
 
@@ -27,13 +25,11 @@ class Gameboard {
     }
     const [x, y] = coordinates;
     if (direction === 'vertical') {
-      console.log('vertical');
       for (let i = 0; i < ship.length; i++) {
         this.grid[y + i][x] = ship;
       }
       this.ships.push(ship);
     } else {
-      console.log('horizontal');
       for (let i = 0; i < ship.length; i++) {
         this.grid[x][y + i] = ship;
       }
@@ -42,21 +38,15 @@ class Gameboard {
     return this.grid;
   }
 
-  // take a pair of coordinates, determine if ship has taken damage,
-  // then sends the hit function to the correct ship, or
-  // records the coordinates of the missed shot
   receiveAttack(ship, coordinates) {
     const [x, y] = coordinates;
-    this.grid[x][y] = 'x';
-    // if the square is null
     if (this.grid[x][y] === null) {
-      // add it to missed shots array
-      this.missedShots.push(coordinates);
-      console.log(`missed shots array is:${this.missedShots}`);
+      this.grid[x][y] = 'x';
+      this.missedShots.push(this.grid[x][y]);
     } else {
-      // else hit that ship
       ship.hit();
     }
+
     return this.grid;
   }
 
@@ -70,7 +60,7 @@ const testGameboard = new Gameboard();
 const newShip = new Ship(4);
 
 testGameboard.placeShip(newShip, [0, 0], 'vertical');
-testGameboard.placeShip(newShip, [11, 11], 'vertical');
-// testGameboard.receiveAttack(newShip, [0, 0]);
-// testGameboard.receiveAttack(newShip, [9, 9], 'horizontal');
+testGameboard.placeShip(newShip, [0, 0], 'horizontal');
+testGameboard.receiveAttack(newShip, [0, 0]);
+testGameboard.receiveAttack(newShip, [9, 9]);
 console.log(testGameboard);
