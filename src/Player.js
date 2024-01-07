@@ -48,6 +48,7 @@ class Ai extends Player {
 }
 
 module.exports = Player;
+module.exports = Ai;
 
 const ai = new Ai('Ai');
 ai.getRandomPlace();
