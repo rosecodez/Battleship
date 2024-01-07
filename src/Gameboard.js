@@ -14,15 +14,16 @@ class Gameboard {
     const [x, y] = coordinates;
     if (x >= 0 && x < 9 && y >= 0 && y < 9) {
       console.log('move is on board');
-    } else {
-      console.log('move is not on board');
+      return true;
     }
+    console.log('move is not on board');
+    return false;
   }
 
   // place ship at specific coordinates by calling ship constructor
   placeShip(ship, coordinates, direction) {
     if (!this.isLegal(coordinates)) {
-      throw new Error('Move is not on board');
+      throw new Error('move is not on board ');
     }
     const [x, y] = coordinates;
     if (direction === 'vertical') {
@@ -67,10 +68,9 @@ module.exports = Gameboard;
 
 const testGameboard = new Gameboard();
 const newShip = new Ship(4);
-testGameboard.isLegal([100, 100]);
-testGameboard.isLegal([1, 1]);
 
-// testGameboard.placeShip(newShip, [10, 10], 'vertical');
+testGameboard.placeShip(newShip, [0, 0], 'vertical');
+testGameboard.placeShip(newShip, [11, 11], 'vertical');
 // testGameboard.receiveAttack(newShip, [0, 0]);
 // testGameboard.receiveAttack(newShip, [9, 9], 'horizontal');
 console.log(testGameboard);
