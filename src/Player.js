@@ -1,6 +1,8 @@
+/* eslint-disable no-bitwise */
 /* eslint-disable no-plusplus */
 /* eslint-disable max-classes-per-file */
 const Gameboard = require('./Gameboard');
+const Ship = require('./Ship');
 
 class Player {
   constructor(name) {
@@ -22,28 +24,33 @@ class Player {
 }
 
 class Ai extends Player {
-  getRandomChoice() {
-    const x = [Math.floor(Math.random() * 9)];
-    const y = [Math.floor(Math.random() * 9)];
-    const shipRandomSize = [Math.floor(Math.random() * 4)];
-    console.log(`ship random size is: ${shipRandomSize}`);
-    const direction = ['horizontal', 'vertical'];
-    const directionChoice = direction[Math.floor(Math.random() * direction.length)];
-    console.log(`direction choice is: ${directionChoice}`);
+  getRandomPlace() {
+    const ship = new Ship(4);
 
+    const x = Math.floor(Math.random() * 9);
+    const y = Math.floor(Math.random() * 9);
     const coordinates = [x, y];
-    if (!this.isLegal(coordinates)) {
-      console.log('random choice -> its not a legal move');
-    }
-    console.log('random choice -> legal move');
 
-    this.attack(shipRandomSize, coordinates);
-    this.placeShip(shipRandomSize, coordinates, direction);
+    const directions = ['horizontal', 'vertical'];
+    const directionChoice = directions[Math.floor(Math.random() * directions.length)];
+
+    this.placeShip(ship, coordinates, directionChoice);
+  }
+
+  getRandomAttack() {
+    const ship = new Ship(4);
+
+    const x = Math.floor(Math.random() * 9);
+    const y = Math.floor(Math.random() * 9);
+    const coordinates = [x, y];
+    this.attack(ship, coordinates);
   }
 }
 
 module.exports = Player;
 
 const ai = new Ai('Ai');
-ai.getRandomChoice();
+ai.getRandomPlace();
+ai.getRandomAttack();
+
 console.log(ai.grid);

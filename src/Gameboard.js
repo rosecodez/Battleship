@@ -55,12 +55,3 @@ class Gameboard {
   }
 }
 module.exports = Gameboard;
-
-const testGameboard = new Gameboard();
-const newShip = new Ship(4);
-
-testGameboard.placeShip(newShip, [0, 0], 'vertical');
-testGameboard.placeShip(newShip, [0, 0], 'horizontal');
-testGameboard.receiveAttack(newShip, [0, 0]);
-testGameboard.receiveAttack(newShip, [9, 9]);
-console.log(testGameboard);
