@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-plusplus */
+const { max } = require('lodash');
 const Ship = require('./Ship');
 
 class Gameboard {
@@ -10,26 +11,42 @@ class Gameboard {
     this.grid = new Array(10).fill(0).map(() => new Array(10).fill(null));
   }
 
-  isLegalCoordinate(coordinates) {
+  isLegalCoordinates(coordinates) {
     const [x, y] = coordinates;
     if (x >= 0 && x < 9 && y >= 0 && y < 9) {
+      console.log('coordinate is true');
       return true;
     }
+    console.log('coordinate is false');
     return false;
   }
 
   shipOutOfBonds(ship, coordinates, direction) {
     const [x, y] = coordinates;
-    for (let i = 0; i < ship.length; i += 1) {
-      if (this.grid[x] >= this.grid.length || this.grid[y] >= this.grid.length) {
-        return false;
+
+    if (direction === 'horizontal') {
+      const maxLeftAndRightValue = coordinates[1] + (ship.length - 1);
+      console.log(`max left right value horizontal: ${maxLeftAndRightValue}`);
+      if (this.isLegalCoordinates([x, maxLeftAndRightValue])) {
+        console.log('horizontal coordinate is true');
+        return true;
       }
     }
-    return true;
+
+    if (direction === 'vertical') {
+      const maxLeftAndRightValueV = coordinates[1] + (ship.length - 1);
+      console.log(`max left right value vertical: ${maxLeftAndRightValueV}`);
+      if (this.isLegalCoordinates([y, maxLeftAndRightValueV])) {
+        console.log('vertical coordinate is true');
+        return true;
+      }
+    }
+    console.log('coordinate is false');
+    return false;
   }
 
   placeShip(ship, coordinates, direction) {
-    if (!this.isLegalCoordinate(coordinates)) {
+    if (!this.isLegalCoordinates(coordinates)) {
       throw new Error('coordinates are higher than board row/column ');
     } else if (!this.shipOutOfBonds(ship, coordinates, direction)) {
       throw new Error('ship out of bounds ');
@@ -67,12 +84,3 @@ class Gameboard {
   }
 }
 module.exports = Gameboard;
-
-const testGameboard = new Gameboard();
-const newShip = new Ship(4);
-
-testGameboard.placeShip(newShip, [0, 0], 'vertical');
-testGameboard.placeShip(newShip, [0, 0], 'horizontal');
-testGameboard.receiveAttack(newShip, [0, 0]);
-testGameboard.receiveAttack(newShip, [9, 9]);
-console.log(testGameboard);
