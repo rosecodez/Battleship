@@ -49,11 +49,12 @@ class Ai extends Player {
 
 module.exports = Player;
 module.exports = Ai;
-const newShip = new Ship(4);
-const john = new Player('John');
-john.placeShip(newShip, [0, 0], 'vertical');
+// const newShip = new Ship(4);
+// const john = new Player('John');
+// john.placeShip(newShip, [0, 0], 'vertical');
+// john.placeShip(newShip, [0, 0], 'horizontal');
 // const ai = new Ai('Ai');
 // ai.getRandomPlace();
 // ai.getRandomAttack();
 
-console.log(john.grid);
+// console.log(john.grid);

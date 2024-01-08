@@ -14,10 +14,10 @@ class Gameboard {
   isLegalCoordinates(coordinates) {
     const [x, y] = coordinates;
     if (x >= 0 && x < 9 && y >= 0 && y < 9) {
-      console.log('coordinate is true');
+      console.log('0. coordinate is legal/true');
       return true;
     }
-    console.log('coordinate is false');
+    console.log('0. coordinate is not legal/false');
     return false;
   }
 
@@ -26,18 +26,18 @@ class Gameboard {
 
     if (direction === 'horizontal') {
       const maxLeftAndRightValue = coordinates[1] + (ship.length - 1);
-      console.log(`max left right value horizontal: ${maxLeftAndRightValue}`);
+      console.log(`1. max left right value horizontal: ${maxLeftAndRightValue}`);
       if (this.isLegalCoordinates([x, maxLeftAndRightValue])) {
-        console.log('horizontal coordinate is true');
+        console.log('1. horizontal coordinate is true');
         return true;
       }
     }
 
     if (direction === 'vertical') {
       const maxLeftAndRightValueV = coordinates[1] + (ship.length - 1);
-      console.log(`max left right value vertical: ${maxLeftAndRightValueV}`);
-      if (this.isLegalCoordinates([y, maxLeftAndRightValueV])) {
-        console.log('vertical coordinate is true');
+      console.log(`2. max left right value vertical: ${maxLeftAndRightValueV}`);
+      if (this.isLegalCoordinates([x, maxLeftAndRightValueV])) {
+        console.log('2. vertical coordinate is true');
         return true;
       }
     }
@@ -48,13 +48,11 @@ class Gameboard {
   placeShip(ship, coordinates, direction) {
     if (!this.isLegalCoordinates(coordinates)) {
       throw new Error('coordinates are higher than board row/column ');
-    } else if (!this.shipOutOfBonds(ship, coordinates, direction)) {
-      throw new Error('ship out of bounds ');
     } else {
       const [x, y] = coordinates;
       if (direction === 'vertical') {
         for (let i = 0; i < ship.length; i++) {
-          this.grid[y + i][x] = ship;
+          this.grid[x + i][y] = ship;
         }
         this.ships.push(ship);
       } else {
@@ -84,3 +82,9 @@ class Gameboard {
   }
 }
 module.exports = Gameboard;
+const newShip = new Ship(4);
+const testGameboard = new Gameboard();
+testGameboard.placeShip(newShip, [0, 0], 'horizontal');
+testGameboard.placeShip(newShip, [0, 0], 'vertical');
+testGameboard.shipOutOfBonds(newShip, [0, 0], 'vertical');
+testGameboard.shipOutOfBonds(newShip, [0, 0], 'horizontal');
