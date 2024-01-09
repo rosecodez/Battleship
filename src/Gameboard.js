@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-disable no-plusplus */
-const { max } = require('lodash');
 const Ship = require('./Ship');
 
 class Gameboard {
@@ -14,39 +13,33 @@ class Gameboard {
   isLegalCoordinates(coordinates) {
     const [x, y] = coordinates;
     if (x >= 0 && x < 9 && y >= 0 && y < 9) {
-      console.log('0. coordinate is legal/true');
       return true;
     }
-    console.log('0. coordinate is not legal/false');
     return false;
   }
 
-  shipOutOfBonds(ship, coordinates, direction) {
+  shipOutOfBounds(ship, coordinates, direction) {
     const [x, y] = coordinates;
 
     if (direction === 'horizontal') {
       const maxLeftAndRightValue = coordinates[1] + (ship.length - 1);
-      console.log(`1. max left right value horizontal: ${maxLeftAndRightValue}`);
       if (this.isLegalCoordinates([x, maxLeftAndRightValue])) {
-        console.log('1. horizontal coordinate is true');
         return true;
       }
     }
 
     if (direction === 'vertical') {
-      const maxLeftAndRightValueV = coordinates[1] + (ship.length - 1);
-      console.log(`2. max left right value vertical: ${maxLeftAndRightValueV}`);
-      if (this.isLegalCoordinates([x, maxLeftAndRightValueV])) {
-        console.log('2. vertical coordinate is true');
+      const maxUpAndDownValue = coordinates[0] + (ship.length - 1);
+      if (this.isLegalCoordinates([maxUpAndDownValue, y])) {
         return true;
       }
     }
-    console.log('coordinate is false');
     return false;
   }
 
   placeShip(ship, coordinates, direction) {
-    if (!this.isLegalCoordinates(coordinates)) {
+    if (!this.isLegalCoordinates(coordinates)
+      && !this.shipOutOfBounds(ship, coordinates, direction)) {
       throw new Error('coordinates are higher than board row/column ');
     } else {
       const [x, y] = coordinates;
@@ -82,9 +75,9 @@ class Gameboard {
   }
 }
 module.exports = Gameboard;
-const newShip = new Ship(4);
+/* const newShip = new Ship(4);
 const testGameboard = new Gameboard();
-testGameboard.placeShip(newShip, [0, 0], 'horizontal');
-testGameboard.placeShip(newShip, [0, 0], 'vertical');
-testGameboard.shipOutOfBonds(newShip, [0, 0], 'vertical');
-testGameboard.shipOutOfBonds(newShip, [0, 0], 'horizontal');
+testGameboard.shipOutOfBounds(newShip, [3, 1], 'vertical');
+testGameboard.placeShip(newShip, [6, 0], 'vertical');
+
+console.log(testGameboard); */
