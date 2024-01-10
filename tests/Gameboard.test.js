@@ -28,7 +28,7 @@ test('receive attack on first square of the ship', () => {
   expect(testGameboard.receiveAttack(newShip, [0, 0])).toBeTruthy();
 });
 
-test('all ships on board sunk', () => {
+test('all ships sunk', () => {
   const testGameboard = new Gameboard();
   const newShip = new Ship(4);
   testGameboard.placeShip(newShip, [0, 0]);

@@ -58,15 +58,28 @@ class Gameboard {
     }
   }
 
+  alreadyShot(coordinates) {
+    const [x, y] = coordinates;
+
+    if (this.grid[x][y] === 'x') {
+      console.log('coordinate has an x already');
+      return true;
+    }
+    console.log('coordinate doesnt have an x ');
+    return false;
+  }
+
   receiveAttack(ship, coordinates) {
     const [x, y] = coordinates;
+    if (this.alreadyShot(coordinates)) {
+      throw new Error('already shot');
+    }
     if (this.grid[x][y] === null) {
       this.grid[x][y] = 'x';
       this.missedShots.push(this.grid[x][y]);
     } else {
       ship.hit();
     }
-
     return this.grid;
   }
 
@@ -74,10 +87,11 @@ class Gameboard {
     return this.ships.every((ship) => ship.isSunk());
   }
 }
-module.exports = Gameboard;
-/* const newShip = new Ship(4);
-const testGameboard = new Gameboard();
-testGameboard.shipOutOfBounds(newShip, [3, 1], 'vertical');
-testGameboard.placeShip(newShip, [6, 0], 'vertical');
 
-console.log(testGameboard); */
+module.exports = Gameboard;
+const newShip = new Ship(4);
+const testGameboard = new Gameboard();
+testGameboard.placeShip(newShip, [6, 0], 'vertical');
+testGameboard.receiveAttack(newShip, [0, 0]);
+testGameboard.receiveAttack(newShip, [0, 1]);
+console.log(testGameboard);
