@@ -12,4 +12,5 @@
 
 // 3.
 // create conditions so that the game ends once one player's ships have all been sunk
-// this function is appropiate for the game modules
+// this function is appropriate for the game modules
+import './style.css';
