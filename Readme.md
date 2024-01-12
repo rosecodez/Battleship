@@ -15,3 +15,7 @@
 (ship is showing 10x10 array but was too long to add everything in single picture)
 
 ![Alt text](image-1.png)
+
+- Page setup sketch + ideas
+
+![Alt text](image-2.png)
