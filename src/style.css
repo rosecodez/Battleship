@@ -31,13 +31,6 @@ h1{
 table, td, th {
 	border: 1px solid;
 }
-tbody {
-	display: flex;
-}
-td {
-    display: flex;
-    justify-content: center;
-}
 table {
 	width: 100%;
 	border-collapse: collapse;
