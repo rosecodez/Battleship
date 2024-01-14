@@ -22,10 +22,12 @@ const Player = require('./Player');
 const humanGrid = document.getElementById('human-grid');
 const aiGrid = document.getElementById('ai-grid');
 const content = document.getElementById('content');
-console.log(content);
+console.log(humanGrid);
+console.log(aiGrid)
 const john = new Player('John');
+console.log(john.grid)
 const ai = new Player('ai');
-console.log(john);
+
 
 function createTable(tableData, grid) {
   const table = document.createElement('table');
@@ -46,4 +48,15 @@ function createTable(tableData, grid) {
   table.appendChild(tableBody);
   grid.appendChild(table);
 }
-//createTable([['row 1, cell 1', 'row 1, cell 2'], ['row 2, cell 1', 'row 2, cell 2']], content);
+
+const newShip = new Ship(4);
+const playerGameboard = new Gameboard();
+const aiGameboard = new Gameboard();
+console.log(playerGameboard)
+
+playerGameboard.placeShip(newShip, [6, 0], 'vertical');
+playerGameboard.receiveAttack(newShip, [0, 0]);
+aiGameboard.placeShip(newShip, [0, 0], 'horizontal');
+aiGameboard.receiveAttack(newShip, [0, 9]);
+createTable(playerGameboard.grid, humanGrid);
+createTable(aiGameboard.grid, aiGrid);
