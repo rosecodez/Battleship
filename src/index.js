@@ -45,11 +45,16 @@ function createTable({tableData, grid, boolean}) {
       cell.innerHTML = '';
       if(boolean === true) {
         cell.style.cursor = "pointer";
-        cell.addEventListener('click', function() {
-          console.log("cell clicked");
+        //on click return the [x,y] coordinate for specific cell
+        cell.addEventListener('click', function(evt) {
+          console.log(cell.innerHTML);
+          const x = evt.target.parentElement.rowIndex;
+          const y = evt.target.cellIndex;
+          const coordinates = [x,y];
+          console.log(coordinates);
+          playerGameboard.receiveAttack(newShip, coordinates);
         })
       }
-      console.log("hidden value is" + boolean)
     });
 
     tableBody.appendChild(row);
@@ -65,10 +70,7 @@ const playerGameboard = new Gameboard();
 const aiGameboard = new Gameboard();
 console.log(playerGameboard)
 
-
-
 //playerGameboard.placeShip(newShip, [6, 0], 'vertical');
-//playerGameboard.receiveAttack(newShip, [0, 0]);
 
 //aiGameboard.placeShip(newShip, [0, 0], 'horizontal');
 //aiGameboard.receiveAttack(newShip, [0, 9]);
@@ -76,8 +78,10 @@ console.log(playerGameboard)
 createTable({
   tableData: playerGameboard.grid, 
   grid: humanGrid,
-  boolean: true});
+  boolean: true
+});
 createTable({
   tableData: aiGameboard.grid,
   grid: aiGrid,
-  boolean: false});
+  boolean: false
+});
