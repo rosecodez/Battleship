@@ -22,6 +22,7 @@ const Player = require('./Player');
 const humanGrid = document.getElementById('human-grid');
 const aiGrid = document.getElementById('ai-grid');
 const content = document.getElementById('content');
+
 console.log(humanGrid);
 console.log(aiGrid)
 const john = new Player('John');
@@ -40,6 +41,9 @@ function createTable(tableData, grid) {
       const cell = document.createElement('td');
       cell.appendChild(document.createTextNode(cellData));
       row.appendChild(cell);
+      const cells = document.querySelectorAll('td');
+      // hide cell content - the initial "null" 
+      cell.style.visibility = 'hidden';
     });
 
     tableBody.appendChild(row);
@@ -54,9 +58,13 @@ const playerGameboard = new Gameboard();
 const aiGameboard = new Gameboard();
 console.log(playerGameboard)
 
-playerGameboard.placeShip(newShip, [6, 0], 'vertical');
-playerGameboard.receiveAttack(newShip, [0, 0]);
-aiGameboard.placeShip(newShip, [0, 0], 'horizontal');
-aiGameboard.receiveAttack(newShip, [0, 9]);
+
+
+//playerGameboard.placeShip(newShip, [6, 0], 'vertical');
+//playerGameboard.receiveAttack(newShip, [0, 0]);
+
+//aiGameboard.placeShip(newShip, [0, 0], 'horizontal');
+//aiGameboard.receiveAttack(newShip, [0, 9]);
+
 createTable(playerGameboard.grid, humanGrid);
 createTable(aiGameboard.grid, aiGrid);
