@@ -46,13 +46,14 @@ function createTable({tableData, grid, boolean}) {
       if(boolean === true) {
         cell.style.cursor = "pointer";
         //on click return the [x,y] coordinate for specific cell
-        cell.addEventListener('click', function(evt) {
+        cell.addEventListener('click', function(e) {
           console.log(cell.innerHTML);
-          const x = evt.target.parentElement.rowIndex;
-          const y = evt.target.cellIndex;
+          const x = e.target.parentElement.rowIndex;
+          const y = e.target.cellIndex;
           const coordinates = [x,y];
           console.log(coordinates);
           playerGameboard.receiveAttack(newShip, coordinates);
+          cell.innerHTML = 'x';
         })
       }
     });
