@@ -23,14 +23,13 @@ const humanGrid = document.getElementById('human-grid');
 const aiGrid = document.getElementById('ai-grid');
 const content = document.getElementById('content');
 
-console.log(humanGrid);
-console.log(aiGrid)
+
 const john = new Player('John');
 console.log(john.grid)
 const ai = new Player('ai');
 
 
-function createTable(tableData, grid) {
+function createTable({tableData, grid, boolean}) {
   const table = document.createElement('table');
   const tableBody = document.createElement('tbody');
 
@@ -39,11 +38,18 @@ function createTable(tableData, grid) {
 
     rowData.forEach((cellData) => {
       const cell = document.createElement('td');
+      
       cell.appendChild(document.createTextNode(cellData));
       row.appendChild(cell);
-      const cells = document.querySelectorAll('td');
-      // hide cell content - the initial "null" 
-      cell.style.visibility = 'hidden';
+      // override cell content - the initial "null" 
+      cell.innerHTML = '';
+      if(boolean === true) {
+        cell.style.cursor = "pointer";
+        cell.addEventListener('click', function() {
+          console.log("cell clicked");
+        })
+      }
+      console.log("hidden value is" + boolean)
     });
 
     tableBody.appendChild(row);
@@ -51,6 +57,7 @@ function createTable(tableData, grid) {
 
   table.appendChild(tableBody);
   grid.appendChild(table);
+  
 }
 
 const newShip = new Ship(4);
@@ -66,5 +73,11 @@ console.log(playerGameboard)
 //aiGameboard.placeShip(newShip, [0, 0], 'horizontal');
 //aiGameboard.receiveAttack(newShip, [0, 9]);
 
-createTable(playerGameboard.grid, humanGrid);
-createTable(aiGameboard.grid, aiGrid);
+createTable({
+  tableData: playerGameboard.grid, 
+  grid: humanGrid,
+  boolean: true});
+createTable({
+  tableData: aiGameboard.grid,
+  grid: aiGrid,
+  boolean: false});
