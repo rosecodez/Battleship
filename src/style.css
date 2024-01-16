@@ -9,12 +9,16 @@ body {
     gap: 20px;
 	padding: 75px;
 }
+
+/* header */
 #header {
 	padding-bottom: 20px;
 }
 h1{
 	font-size: 35px;
 }
+
+/* content */
 #content {
 	display: flex;
 	flex-direction: row;
@@ -47,6 +51,10 @@ td {
 	width: 40px;
 	height: 20px;
 }
+img {
+	width: 27px;
+}
+/* footer */
 #footer {
 	padding-top: 50px;
 }

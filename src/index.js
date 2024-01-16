@@ -1,9 +1,3 @@
-// 1.
-// set up a new game
-// create players and gameboards
-// populate each gameboard with predetermined coordinates
-// implement a system for allowing to place ships *later*
-
 // 2.
 // game loop should step through the game turn by turn
 // using only methods from other objects
@@ -14,6 +8,12 @@
 // create conditions so that the game ends once one player's ships have all been sunk
 // this function is appropriate for the game modules
 import './style.css';
+import boat from './images/boat.png';
+// boat image for one square
+const boatImg = new Image();
+boatImg.src = boat;
+
+console.log(boatImg);
 
 const Gameboard = require('./Gameboard');
 const Ship = require('./Ship');
@@ -23,13 +23,15 @@ const humanGrid = document.getElementById('human-grid');
 const aiGrid = document.getElementById('ai-grid');
 const content = document.getElementById('content');
 
-
 const john = new Player('John');
-console.log(john.grid)
 const ai = new Player('ai');
 
+const newShip = new Ship(4);
 
-function createTable({tableData, grid, boolean}) {
+const playerGameboard = new Gameboard();
+const aiGameboard = new Gameboard();
+
+function createTable({ tableData, grid, boolean }) {
   const table = document.createElement('table');
   const tableBody = document.createElement('tbody');
 
@@ -38,23 +40,31 @@ function createTable({tableData, grid, boolean}) {
 
     rowData.forEach((cellData) => {
       const cell = document.createElement('td');
-      
+
       cell.appendChild(document.createTextNode(cellData));
       row.appendChild(cell);
-      // override cell content - the initial "null" 
-      cell.innerHTML = '';
-      if(boolean === true) {
-        cell.style.cursor = "pointer";
-        //on click return the [x,y] coordinate for specific cell
-        cell.addEventListener('click', function(e) {
-          console.log(cell.innerHTML);
+      // if boolean is true as parameter,
+      // these code blocks are only intended for human player,
+      // ai will automatically make its move if boolean is false
+      if (boolean === true) {
+        cell.style.cursor = 'pointer';
+        // on click get the [x,y] coordinate for specific cell
+        cell.addEventListener('click', (e) => {
           const x = e.target.parentElement.rowIndex;
           const y = e.target.cellIndex;
-          const coordinates = [x,y];
+          const coordinates = [x, y];
           console.log(coordinates);
+          // receive an attack
           playerGameboard.receiveAttack(newShip, coordinates);
-          cell.innerHTML = 'x';
-        })
+          // append boat image inside cell
+          cell.textContent = '';
+          cell.appendChild(boatImg);
+          console.log(playerGameboard);
+        });
+      }
+      // if boolean is false, code belongs to ai table
+      if (boolean === false) {
+        //
       }
     });
 
@@ -63,26 +73,17 @@ function createTable({tableData, grid, boolean}) {
 
   table.appendChild(tableBody);
   grid.appendChild(table);
-  
 }
-
-const newShip = new Ship(4);
-const playerGameboard = new Gameboard();
-const aiGameboard = new Gameboard();
-console.log(playerGameboard)
-
-//playerGameboard.placeShip(newShip, [6, 0], 'vertical');
-
-//aiGameboard.placeShip(newShip, [0, 0], 'horizontal');
-//aiGameboard.receiveAttack(newShip, [0, 9]);
+// implement a system for allowing to place ships *later*
 
 createTable({
-  tableData: playerGameboard.grid, 
+  tableData: playerGameboard.grid,
   grid: humanGrid,
-  boolean: true
+  boolean: true,
 });
 createTable({
   tableData: aiGameboard.grid,
   grid: aiGrid,
-  boolean: false
+  boolean: false,
 });
+console.log(ai);
