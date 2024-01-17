@@ -19,3 +19,7 @@
 - Page setup sketch + ideas
 
 ![Alt text](image-4.png)
+
+- Progress:
+
+![Alt text](image-2.png)

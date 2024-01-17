@@ -1,9 +1,3 @@
-// 2.
-// game loop should step through the game turn by turn
-// using only methods from other objects
-// if at any point i am tempted to write a new function inside the game loop
-// step back and figure out which class or module that function should belong to
-
 // 3.
 // create conditions so that the game ends once one player's ships have all been sunk
 // this function is appropriate for the game modules
@@ -50,6 +44,7 @@ function createTable({ tableData, grid, boolean }) {
         cell.style.cursor = 'pointer';
         // on click get the [x,y] coordinate for specific cell
         cell.addEventListener('click', (e) => {
+          console.log(e);
           const x = e.target.parentElement.rowIndex;
           const y = e.target.cellIndex;
           const coordinates = [x, y];
