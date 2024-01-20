@@ -1,16 +1,15 @@
 import './style.css';
-import { drop } from 'lodash';
 import boat from './images/boat.png';
 import gameLoop from './gameloop';
-// boat image for one square
-const boatImg = new Image();
-boatImg.src = boat;
-
-console.log(boatImg);
 
 const Gameboard = require('./Gameboard');
 const Ship = require('./Ship');
 const Player = require('./Player');
+
+// boat image for one square
+const boatImg = new Image();
+boatImg.src = boat;
+console.log(boatImg);
 
 const humanGrid = document.getElementById('human-grid');
 const aiGrid = document.getElementById('ai-grid');
@@ -82,19 +81,22 @@ createTable({
   grid: aiGrid,
   boolean: false,
 });
-const cell = document.getElementsByTagName('cell');
 
+const cell = document.getElementById('cell');
 // drag and drop
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
 function drag(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
+  ev.dataTransfer.setData('text', ev.target.id);
 }
 
 function drop(ev) {
   ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
+  const data = ev.dataTransfer.getData('text');
   ev.target.appendChild(document.getElementById(data));
 }
+cell.ondrop(drop());
+cell.ondragover(allowDrop());
+boatImg.draggable(true).ondragstart(drag());
