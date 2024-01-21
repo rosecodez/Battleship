@@ -7,7 +7,7 @@ class Gameboard {
     this.ships = [];
     this.shipsSunk = [];
     this.missedShots = [];
-    this.grid = new Array(10).fill(0).map(() => new Array(10).fill(null));
+    this.grid = new Array(10).fill(0).map(() => new Array(10).fill(''));
   }
 
   isLegalCoordinates(coordinates) {
@@ -74,7 +74,7 @@ class Gameboard {
     if (this.alreadyShot(coordinates)) {
       throw new Error('already shot');
     }
-    if (this.grid[x][y] === null) {
+    if (this.grid[x][y] === '') {
       this.grid[x][y] = 'x';
       this.missedShots.push(this.grid[x][y]);
     } else {

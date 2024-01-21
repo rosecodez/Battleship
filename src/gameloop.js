@@ -1,8 +1,13 @@
+/* eslint-disable no-plusplus */
 // game loop should step through the game turn by turn
 // using only methods from other objects
 // if at any point i am tempted to write a new function inside the game loop
 // step back and figure out which class or module that function should belong to
-import Ship from './Ship';
+import { playerGameboard, aiGameboard } from '.';
+
+const Gameboard = require('./Gameboard');
+const Ship = require('./Ship');
+const Player = require('./Player');
 
 export function createShips(grid) {
   // each player will have 4 ship x 1square,3 ship x 4square, 3 ship x 2square
@@ -62,7 +67,8 @@ export function gameLoop() {
   // game preparation
 
   // place ships
-
+  createShips(playerGameboard);
+  console.log(playerGameboard);
   // HTML Drag and Drop API for human player
   // start game
   // turn-based style, increment each turn
