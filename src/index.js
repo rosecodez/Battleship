@@ -1,4 +1,5 @@
 import './style.css';
+import { createShips } from './gameloop';
 
 const Gameboard = require('./Gameboard');
 const Ship = require('./Ship');
@@ -16,6 +17,8 @@ const newShip = new Ship(4);
 const playerGameboard = new Gameboard();
 const aiGameboard = new Gameboard();
 
+// function that takes the 2D array created in Gameboard.js constructors as parameter
+// and it renders it into a table and appends to the html
 function createTable({ tableData, grid, boolean }) {
   const table = document.createElement('table');
   const tableBody = document.createElement('tbody');
@@ -42,7 +45,6 @@ function createTable({ tableData, grid, boolean }) {
           playerGameboard.receiveAttack(newShip, coordinates);
           cell.textContent = '';
           cell.style.backgroundColor = 'black';
-          console.log(playerGameboard);
         });
       }
       // if boolean is false, code belongs to ai table
@@ -57,7 +59,6 @@ function createTable({ tableData, grid, boolean }) {
   table.appendChild(tableBody);
   grid.appendChild(table);
 }
-// implement a system for allowing to place ships *later*
 
 createTable({
   tableData: playerGameboard.grid,
@@ -69,6 +70,8 @@ createTable({
   grid: aiGrid,
   boolean: false,
 });
-console.log(ai);
-
+createShips(playerGameboard);
+createShips(aiGameboard);
+console.log(playerGameboard);
+console.log(playerGameboard);
 export { playerGameboard, aiGameboard };
