@@ -41,11 +41,28 @@ export function createShips(grid) {
   grid.placeShip(fourSquareShipThree, coordinates, direction);
 }
 
-export default function gameLoop() {
-  const cell = document.querySelectorAll('td');
-  console.log(cell);
+export function gameLoop() {
+  const cells = document.getElementsByClassName('cell');
+  for (let i = 0; i < cells.length; i++) {
+    const cell = cells[i];
+    // on click get the [x,y] coordinate for specific cell
+    cell.addEventListener('click', (e) => {
+      console.log(e);
+      const x = e.target.parentElement.rowIndex;
+      const y = e.target.cellIndex;
+      const coordinates = [x, y];
+      console.log(coordinates);
+      // receive an attack
+      // playerGameboard.receiveAttack(newShip, coordinates);
+      cell.textContent = '';
+      cell.style.backgroundColor = 'black';
+    });
+  }
+
   // game preparation
+
   // place ships
+
   // HTML Drag and Drop API for human player
   // start game
   // turn-based style, increment each turn
