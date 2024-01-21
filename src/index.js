@@ -1,10 +1,4 @@
 import './style.css';
-import boat from './images/boat.png';
-// boat image for one square
-const boatImg = new Image();
-boatImg.src = boat;
-
-console.log(boatImg);
 
 const Gameboard = require('./Gameboard');
 const Ship = require('./Ship');
@@ -31,14 +25,12 @@ function createTable({ tableData, grid, boolean }) {
 
     rowData.forEach((cellData) => {
       const cell = document.createElement('td');
-
       cell.appendChild(document.createTextNode(cellData));
       row.appendChild(cell);
       // if boolean is true as parameter,
       // these code blocks are only intended for human player,
       // ai will automatically make its move if boolean is false
       if (boolean === true) {
-        cell.style.cursor = 'pointer';
         // on click get the [x,y] coordinate for specific cell
         cell.addEventListener('click', (e) => {
           console.log(e);
@@ -48,9 +40,8 @@ function createTable({ tableData, grid, boolean }) {
           console.log(coordinates);
           // receive an attack
           playerGameboard.receiveAttack(newShip, coordinates);
-          // append boat image inside cell
           cell.textContent = '';
-          cell.appendChild(boatImg);
+          cell.style.backgroundColor = 'black';
           console.log(playerGameboard);
         });
       }

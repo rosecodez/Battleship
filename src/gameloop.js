@@ -2,8 +2,8 @@
 // using only methods from other objects
 // if at any point i am tempted to write a new function inside the game loop
 // step back and figure out which class or module that function should belong to
-import playerGameboard from '..';
-import aiGameboard from '..';
+import playerGameboard from '.';
+import { aiGameboard } from '.';
 import Ship from './Ship';
 
 function createShips(grid) {
@@ -22,6 +22,7 @@ function createShips(grid) {
   const fourSquareShipThree = new Ship(4);
   grid.placeShip(oneSquareShip, [6, 0], 'vertical');
 }
+
 export default function gameLoop() {
   const cell = document.getElementById('cell');
   // game preparation
