@@ -2,9 +2,11 @@
 // using only methods from other objects
 // if at any point i am tempted to write a new function inside the game loop
 // step back and figure out which class or module that function should belong to
+import playerGameboard from '..';
+import aiGameboard from '..';
 import Ship from './Ship';
 
-function createPlayerShips() {
+function createShips(grid) {
   // each player will have 4shipx1square,3shipx4square, 3shipx2square
   const oneSquareShip = new Ship(1);
   const oneSquareShipTwo = new Ship(1);
@@ -18,13 +20,15 @@ function createPlayerShips() {
   const fourSquareShipOne = new Ship(4);
   const fourSquareShipTwo = new Ship(4);
   const fourSquareShipThree = new Ship(4);
+  grid.placeShip(oneSquareShip, [6, 0], 'vertical');
 }
 export default function gameLoop() {
   const cell = document.getElementById('cell');
   // game preparation
   // place ships
-  //
-  createPlayerShips();
+  createShips(playerGameboard);
+  createShips(aiGameboard);
+
   // HTML Drag and Drop API for human player
   // start game
   // turn-based style, increment each turn

@@ -1,15 +1,14 @@
 import './style.css';
 import boat from './images/boat.png';
-import gameLoop from './gameloop';
+// boat image for one square
+const boatImg = new Image();
+boatImg.src = boat;
+
+console.log(boatImg);
 
 const Gameboard = require('./Gameboard');
 const Ship = require('./Ship');
 const Player = require('./Player');
-
-// boat image for one square
-const boatImg = new Image();
-boatImg.src = boat;
-console.log(boatImg);
 
 const humanGrid = document.getElementById('human-grid');
 const aiGrid = document.getElementById('ai-grid');
@@ -39,9 +38,7 @@ function createTable({ tableData, grid, boolean }) {
       // these code blocks are only intended for human player,
       // ai will automatically make its move if boolean is false
       if (boolean === true) {
-        gameLoop();
         cell.style.cursor = 'pointer';
-        cell.id = 'cell';
         // on click get the [x,y] coordinate for specific cell
         cell.addEventListener('click', (e) => {
           console.log(e);
@@ -81,22 +78,6 @@ createTable({
   grid: aiGrid,
   boolean: false,
 });
+console.log(ai);
 
-const cell = document.getElementById('cell');
-// drag and drop
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-function drag(ev) {
-  ev.dataTransfer.setData('text', ev.target.id);
-}
-
-function drop(ev) {
-  ev.preventDefault();
-  const data = ev.dataTransfer.getData('text');
-  ev.target.appendChild(document.getElementById(data));
-}
-cell.ondrop(drop());
-cell.ondragover(allowDrop());
-boatImg.draggable(true).ondragstart(drag());
+export { playerGameboard, aiGameboard };
