@@ -12,7 +12,7 @@ class Gameboard {
 
   isLegalCoordinates(coordinates) {
     const [x, y] = coordinates;
-    if (x >= 0 && x < 9 && y >= 0 && y < 9) {
+    if (x >= 0 && x <= 9 && y >= 0 && y <= 9) {
       return true;
     }
     return false;
@@ -36,7 +36,6 @@ class Gameboard {
     }
     return false;
   }
-
   placeShip(ship, coordinates, direction) {
     if (!this.isLegalCoordinates(coordinates)
       && !this.shipOutOfBounds(ship, coordinates, direction)) {

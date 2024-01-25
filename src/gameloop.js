@@ -14,6 +14,7 @@ export default function gameLoop() {
     const cell = cells[i];
     if (cell.innerHTML === '[object Object]') {
       cell.style.backgroundColor = 'pink';
+      cell.innerHTML = ' ';
     }
     // on click get the [x,y] coordinate for specific cell
     cell.addEventListener('click', (e) => {

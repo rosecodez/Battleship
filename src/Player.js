@@ -21,8 +21,8 @@ class Player {
 
 class Ai extends Player {
   getRandomPlace() {
-    const ship = new Ship(4);
-
+    const ship = new Ship(Math.floor(Math.random() * 4));
+    
     const x = Math.floor(Math.random() * 9);
     const y = Math.floor(Math.random() * 9);
     const coordinates = [x, y];
@@ -34,7 +34,7 @@ class Ai extends Player {
   }
 
   getRandomAttack() {
-    const ship = new Ship(4);
+    const ship = new Ship(Math.floor(Math.random() * 4));
 
     const x = Math.floor(Math.random() * 9);
     const y = Math.floor(Math.random() * 9);
@@ -46,8 +46,8 @@ class Ai extends Player {
 module.exports = Player;
 module.exports = Ai;
 const newShip = new Ship(4);
-
-// const ai = new Ai('Ai');
-// ai.getRandomPlace();
-// ai.getRandomAttack();
-// console.log(ai.grid);
+/* const ai = new Ai('Ai');
+ ai.getRandomPlace();
+ ai.getRandomAttack();
+ console.log(ai.grid);
+*/

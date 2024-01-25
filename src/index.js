@@ -1,5 +1,6 @@
 import './style.css';
 import gameLoop from './gameloop';
+import Ai from './Player';
 
 const Gameboard = require('./Gameboard');
 const Ship = require('./Ship');
@@ -11,25 +12,25 @@ const aiGrid = document.getElementById('ai-grid');
 const playerGameboard = new Gameboard();
 const aiGameboard = new Gameboard();
 
-function createShips() {
-  // each player will have 4 ship x 1square,3 ship x 4square, 3 ship x 2square
-  const oneSquareShip = new Ship(1);
-  const oneSquareShipTwo = new Ship(1);
-  const oneSquareShipThree = new Ship(1);
-  const oneSquareShipFour = new Ship(1);
+// each player will have 4 ship x 1square,3 ship x 4square, 3 ship x 2square
+const oneSquareShip = new Ship(1);
+const oneSquareShipTwo = new Ship(1);
+const oneSquareShipThree = new Ship(1);
+const oneSquareShipFour = new Ship(1);
 
-  const twoSquareShipOne = new Ship(2);
-  const twoSquareShipTwo = new Ship(2);
-  const twoSquareShipThree = new Ship(2);
+const twoSquareShipOne = new Ship(2);
+const twoSquareShipTwo = new Ship(2);
+const twoSquareShipThree = new Ship(2);
 
-  const fourSquareShipOne = new Ship(4);
-  const fourSquareShipTwo = new Ship(4);
-  const fourSquareShipThree = new Ship(4);
+const fourSquareShipOne = new Ship(4);
+const fourSquareShipTwo = new Ship(4);
+const fourSquareShipThree = new Ship(4);
 
+function createPlayerShips() {
   playerGameboard.placeShip(oneSquareShip, [0, 0], 'vertical');
   playerGameboard.placeShip(oneSquareShipTwo, [6, 8], 'vertical');
-  playerGameboard.placeShip(oneSquareShipThree, [3, 2], 'vertical');
-  playerGameboard.placeShip(oneSquareShipFour, [0, 6], 'vertical');
+  playerGameboard.placeShip(oneSquareShipThree, [2, 2], 'vertical');
+  playerGameboard.placeShip(oneSquareShipFour, [0, 6], 'vertical'); 
 
   playerGameboard.placeShip(twoSquareShipOne, [2, 4], 'horizontal');
   playerGameboard.placeShip(twoSquareShipTwo, [1, 8], 'horizontal');
@@ -42,10 +43,29 @@ function createShips() {
   console.log(playerGameboard);
 }
 
+function createComputerShips() {
+  aiGameboard.placeShip(oneSquareShip, [0, 4], 'vertical');
+  aiGameboard.placeShip(oneSquareShipTwo, [9, 1], 'vertical');
+  aiGameboard.placeShip(oneSquareShipThree, [1, 2], 'vertical');
+  aiGameboard.placeShip(oneSquareShipFour, [1, 1], 'vertical'); 
+
+  aiGameboard.placeShip(twoSquareShipOne, [2, 4], 'horizontal');
+  aiGameboard.placeShip(twoSquareShipTwo, [1, 8], 'horizontal');
+  aiGameboard.placeShip(twoSquareShipThree, [7, 1], 'horizontal');
+
+  aiGameboard.placeShip(fourSquareShipOne, [8, 4], 'horizontal');
+  aiGameboard.placeShip(fourSquareShipTwo, [3, 3], 'vertical');
+  aiGameboard.placeShip(fourSquareShipThree, [5, 6], 'horizontal');
+  console.log(aiGameboard.grid);
+}
 // function that takes the 2D array created in Gameboard.js constructors as parameter
 // and it renders it into a table and appends to the html
-function createTable({ tableData, grid }) {
-  createShips();
+function createTable({ tableData, grid, boolean }) {
+  if(boolean === true) {
+    createPlayerShips()
+  }
+  createComputerShips();
+  
   const table = document.createElement('table');
   const tableBody = document.createElement('tbody');
 
@@ -69,10 +89,14 @@ function createTable({ tableData, grid }) {
 createTable({
   tableData: playerGameboard.grid,
   grid: humanGrid,
+  boolean: true
 });
 createTable({
   tableData: aiGameboard.grid,
   grid: aiGrid,
+  boolean: false
 });
+
 gameLoop();
+
 export { playerGameboard, aiGameboard };
