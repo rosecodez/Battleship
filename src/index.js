@@ -56,15 +56,18 @@ function createComputerShips() {
   aiGameboard.placeShip(fourSquareShipOne, [8, 4], 'horizontal');
   aiGameboard.placeShip(fourSquareShipTwo, [3, 3], 'vertical');
   aiGameboard.placeShip(fourSquareShipThree, [5, 6], 'horizontal');
-  console.log(aiGameboard.grid);
+  console.log(aiGameboard);
 }
+
 // function that takes the 2D array created in Gameboard.js constructors as parameter
 // and it renders it into a table and appends to the html
 function createTable({ tableData, grid, boolean }) {
   if(boolean === true) {
-    createPlayerShips()
+    createPlayerShips();
+    
+  } else if (boolean === false) {
+    createComputerShips();
   }
-  createComputerShips();
   
   const table = document.createElement('table');
   const tableBody = document.createElement('tbody');
@@ -74,16 +77,21 @@ function createTable({ tableData, grid, boolean }) {
 
     rowData.forEach((cellData) => {
       const cell = document.createElement('td');
-      cell.className = 'cell';
+      if(boolean === true) {
+        cell.className = 'human-cells';
+      } else if (boolean === false) {
+        cell.className = 'ai-cells';
+      }
       cell.appendChild(document.createTextNode(cellData));
       row.appendChild(cell);
     });
-
     tableBody.appendChild(row);
+
   });
 
   table.appendChild(tableBody);
   grid.appendChild(table);
+  
 }
 
 createTable({
@@ -91,6 +99,7 @@ createTable({
   grid: humanGrid,
   boolean: true
 });
+
 createTable({
   tableData: aiGameboard.grid,
   grid: aiGrid,

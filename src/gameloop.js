@@ -9,15 +9,17 @@ const Ship = require('./Ship');
 const Player = require('./Player');
 
 export default function gameLoop() {
-  const cells = document.getElementsByClassName('cell');
-  for (let i = 0; i < cells.length; i++) {
-    const cell = cells[i];
-    if (cell.innerHTML === '[object Object]') {
-      cell.style.backgroundColor = 'pink';
-      cell.innerHTML = ' ';
+  const humanCells = document.getElementsByClassName('human-cells');
+  const aiCells = document.getElementsByClassName('ai-cells');
+  for (let i = 0; i < humanCells.length; i++) {
+    const humanCell = humanCells[i];
+    // HTML Drag and Drop API for human player
+    if (humanCell.innerHTML === '[object Object]') {
+      humanCell.style.backgroundColor = 'pink';
+      humanCell.innerHTML = '';
     }
     // on click get the [x,y] coordinate for specific cell
-    cell.addEventListener('click', (e) => {
+    humanCell.addEventListener('click', (e) => {
       console.log(e);
       const x = e.target.parentElement.rowIndex;
       const y = e.target.cellIndex;
@@ -25,12 +27,12 @@ export default function gameLoop() {
       console.log(coordinates);
       // receive an attack
       // playerGameboard.receiveAttack(newShip, coordinates);
-      cell.textContent = '';
-      cell.style.backgroundColor = 'black';
+      humanCell.textContent = '';
+      humanCell.style.backgroundColor = 'black';
     });
   }
 
-  // HTML Drag and Drop API for human player
+  
   // start game
   // turn-based style, increment each turn
   // shots firing
