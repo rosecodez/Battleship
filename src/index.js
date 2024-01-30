@@ -13,18 +13,18 @@ const playerGameboard = new Gameboard();
 const aiGameboard = new Gameboard();
 
 // each player will have 4 ship x 1square,3 ship x 4square, 3 ship x 2square
-const oneSquareShip = new Ship(1);
-const oneSquareShipTwo = new Ship(1);
-const oneSquareShipThree = new Ship(1);
-const oneSquareShipFour = new Ship(1);
+export const oneSquareShip = new Ship(1);
+export const oneSquareShipTwo = new Ship(1);
+export const oneSquareShipThree = new Ship(1);
+export const oneSquareShipFour = new Ship(1);
 
-const twoSquareShipOne = new Ship(2);
-const twoSquareShipTwo = new Ship(2);
-const twoSquareShipThree = new Ship(2);
+export const twoSquareShipOne = new Ship(2);
+export const twoSquareShipTwo = new Ship(2);
+export const twoSquareShipThree = new Ship(2);
 
-const fourSquareShipOne = new Ship(4);
-const fourSquareShipTwo = new Ship(4);
-const fourSquareShipThree = new Ship(4);
+export const fourSquareShipOne = new Ship(4);
+export const fourSquareShipTwo = new Ship(4);
+export const fourSquareShipThree = new Ship(4);
 
 function createPlayerShips() {
   playerGameboard.placeShip(oneSquareShip, [0, 0], 'vertical');
@@ -40,7 +40,7 @@ function createPlayerShips() {
   playerGameboard.placeShip(fourSquareShipTwo, [4, 0], 'horizontal');
   playerGameboard.placeShip(fourSquareShipThree, [3, 6], 'vertical');
 
-  console.log(playerGameboard);
+  //console.log(playerGameboard);
 }
 
 function createComputerShips() {
@@ -64,7 +64,6 @@ function createComputerShips() {
 function createTable({ tableData, grid, boolean }) {
   if(boolean === true) {
     createPlayerShips();
-    
   } else if (boolean === false) {
     createComputerShips();
   }

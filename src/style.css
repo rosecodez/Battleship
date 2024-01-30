@@ -35,7 +35,13 @@ h1{
 table, td, th {
 	border: 1px solid;
 }
-
+#ai-cells {
+	display: none;
+}
+#child {
+	width: 44.89px;
+	height: 44.89px;
+}
 table {
 	display: flex;
 	border-collapse: collapse;
@@ -47,6 +53,7 @@ table {
 	word-wrap:break-word;
 	overflow:scroll;
 }
+
 td {
 	width: 40px;
 	height: 20px;
