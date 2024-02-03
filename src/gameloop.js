@@ -15,13 +15,12 @@ export default function gameLoop() {
   let turn = 0;
   const humanCells = document.getElementsByClassName('human-cells');
   const aiCells = document.getElementsByClassName('ai-cells');
-
   for (let i = 0; i < humanCells.length; i++) {
     const humanCell = humanCells[i];
     // HTML Drag and Drop API for human player
     if (humanCell.innerHTML === '[object Object]') {
       humanCell.style.backgroundColor = 'pink';
-      //humanCell.innerHTML = '';
+      humanCell.innerHTML = '';
     }
   }
 
@@ -46,7 +45,8 @@ export default function gameLoop() {
       console.log("turn is: " + turn);
       
       // if cell contains an object trigger send attack
-      if(aiCell.innerHTML === '[object Object]') {
+      if(aiCell.style.backgroundColor === 'green') {
+        aiCell.style.opacity = "1"
         console.log("cell contains object");
         aiGameboard.receiveAttack(oneSquareShip, coordinates);
         aiCell.textContent = 'ship';
@@ -54,6 +54,7 @@ export default function gameLoop() {
         aiCell.style.pointerEvents = "none";
         console.log(aiGameboard);
       } else if(aiCell.innerHTML !== '[object Object]') {
+        aiCell.style.opacity = "1"
         console.log("shot was missed, cell was empty");
         playerMissedShots++;
         console.log("playerMissedShots: " + playerMissedShots)
@@ -68,7 +69,8 @@ export default function gameLoop() {
       const y = Math.floor(Math.random() * 9);
       const coordinates = [x, y];
       playerGameboard.receiveAttack(oneSquareShip, coordinates);
-      console.log(playerGameboard);   
+      console.log(playerGameboard);
+      
     });
   }
 
