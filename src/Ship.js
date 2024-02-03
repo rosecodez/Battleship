@@ -2,12 +2,17 @@ class Ship {
   constructor(length) {
     this.length = length;
     this.timesHit = 0;
+    this.isSunk = false;
   }
 
   // each time ship gets a hit, increment value of timesHit
   hit() {
     // eslint-disable-next-line no-plusplus
-    return this.timesHit++;
+    this.timesHit++;
+    if (this.timesHit >= this.length) {
+      // if all ships are sunk and true, player wins
+      this.isSunk = true;
+    }
   }
 
   isHit() {

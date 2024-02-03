@@ -12,7 +12,7 @@ const aiGrid = document.getElementById('ai-grid');
 const playerGameboard = new Gameboard();
 const aiGameboard = new Gameboard();
 
-// each player will have 4 ship x 1square,3 ship x 4square, 3 ship x 2square
+// each player will have 4 ship x 1square, 3 ship x 4square, 3 ship x 2square
 export const oneSquareShip = new Ship(1);
 export const oneSquareShipTwo = new Ship(1);
 export const oneSquareShipThree = new Ship(1);
@@ -26,6 +26,7 @@ export const fourSquareShipOne = new Ship(4);
 export const fourSquareShipTwo = new Ship(4);
 export const fourSquareShipThree = new Ship(4);
 
+// functions to place ships for player and ai
 function createPlayerShips() {
   playerGameboard.placeShip(oneSquareShip, [0, 0], 'vertical');
   playerGameboard.placeShip(oneSquareShipTwo, [6, 8], 'vertical');
@@ -83,7 +84,6 @@ function createTable({ tableData, grid, boolean }) {
       row.appendChild(cell);
     });
     tableBody.appendChild(row);
-
   });
 
   table.appendChild(tableBody);

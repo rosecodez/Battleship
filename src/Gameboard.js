@@ -36,6 +36,7 @@ class Gameboard {
     }
     return false;
   }
+  
   placeShip(ship, coordinates, direction) {
     if (!this.isLegalCoordinates(coordinates)
       && !this.shipOutOfBounds(ship, coordinates, direction)) {
@@ -77,6 +78,7 @@ class Gameboard {
       this.grid[x][y] = 'x';
       this.missedShots.push(this.grid[x][y]);
     } else {
+      this.shipsSunk.push(this.grid[x][y]);
       ship.hit();
     }
     return this.grid;
@@ -88,9 +90,4 @@ class Gameboard {
 }
 
 module.exports = Gameboard;
-/* const newShip = new Ship(4);
-const testGameboard = new Gameboard();
-testGameboard.placeShip(newShip, [6, 0], 'vertical');
-testGameboard.receiveAttack(newShip, [0, 0]);
-testGameboard.receiveAttack(newShip, [0, 1]);
-console.log(testGameboard); */
+
