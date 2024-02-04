@@ -45,4 +45,3 @@ class Ai extends Player {
 
 module.exports = Player;
 module.exports = Ai;
-const newShip = new Ship(4);

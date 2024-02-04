@@ -77,9 +77,11 @@ class Gameboard {
     if (this.grid[x][y] === '') {
       this.grid[x][y] = 'x';
       this.missedShots.push(this.grid[x][y]);
-    } else {
+    } else if (ship instanceof Ship) {
       this.shipsSunk.push(this.grid[x][y]);
       ship.hit();
+    } else {
+      console.error("Invalid parameter for receive attack")
     }
     return this.grid;
   }

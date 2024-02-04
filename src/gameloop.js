@@ -23,6 +23,7 @@ export default function gameLoop() {
       const coordinates = [x, y];
 
       const ship = aiGameboard.grid[x][y];
+      
       const attack = aiGameboard.receiveAttack(ship, coordinates);
 
       if (attack && aiCell.innerHTML == '[object Object]') {
@@ -39,20 +40,28 @@ export default function gameLoop() {
         aiCell.style.pointerEvents = "none";
       }
 
-      // Trigger a random attack for the AI when an aiCell is clicked
+      // trigger a random attack for the AI when an aiCell is clicked
         const randomX = Math.floor(Math.random() * 9);
         const randomY = Math.floor(Math.random() * 9);
         const randomCoordinates = [randomX, randomY];
-        const humanShip = playerGameboard.grid[randomX][randomY];
+        console.log("random coords for ai:" + randomCoordinates)
+
+        const humanShip = playerGameboard.grid[randomX, randomY];
 
         const aiAttack = playerGameboard.receiveAttack(humanShip, randomCoordinates);
 
-        // Handle the result of the AI attack
-        const randomHumanCell = humanCells[randomX];
+        // handle the result of the AI attack
+        const randomHumanCell = humanCells[randomX * 9 + randomY]
+        console.log(randomX)
+        console.log(randomY)
+        console.log(randomHumanCell);
+
         if (aiAttack && randomHumanCell.innerHTML === "[object Object]") {
           randomHumanCell.style.backgroundColor = 'red';
+          randomHumanCell.innerHTML = "ship";
         } else if (randomHumanCell.innerHTML !== '[object Object]') {
           randomHumanCell.style.backgroundColor = 'blue';
+          randomHumanCell.innerHTML = "miss";
         }
     });
   }
