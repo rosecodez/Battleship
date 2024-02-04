@@ -71,19 +71,26 @@ class Gameboard {
 
   receiveAttack(ship, coordinates) {
     const [x, y] = coordinates;
-    if (this.alreadyShot(coordinates)) {
-      throw new Error('already shot');
+
+    try {
+      if (this.alreadyShot(coordinates)) {
+        throw new Error('Already shot');
+      }
+
+      if (this.grid[x][y] === '') {
+        this.grid[x][y] = 'x';
+        this.missedShots.push(this.grid[x][y]);
+      } else if (ship instanceof Ship) {
+        this.shipsSunk.push(this.grid[x][y]);
+        ship.hit();
+      } else {
+        throw new Error('Invalid parameter for receive attack');
+      }
+
+      return this.grid;
+    } catch (error) {
+      console.error('Error in receiveAttack');
     }
-    if (this.grid[x][y] === '') {
-      this.grid[x][y] = 'x';
-      this.missedShots.push(this.grid[x][y]);
-    } else if (ship instanceof Ship) {
-      this.shipsSunk.push(this.grid[x][y]);
-      ship.hit();
-    } else {
-      console.error("Invalid parameter for receive attack")
-    }
-    return this.grid;
   }
 
   allSunk() {
