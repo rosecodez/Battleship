@@ -4,12 +4,9 @@
 - this project implements the classic game 'Battleship', that has 2 players, ruled grid on which each player's fleet of warships are marked. The locations of the fleets are concealed from the other player. Players alternate turns calling "shots" at the other player's ships, and the objective of the game is to destroy the opposing player's fleet.
 
 #### Difficulties encountered
-- while building the method to return the direction of the ship to place it `(gameboard-place ship(direction))`, I have thought that what I have built was wrong, but it was actually what I needed to do -> "i need to sketch down more in the future, I did not build the DOM interface yet, so i do not have any better display than the terminal", but the terminal was displaying like this:
 
-![Alt text](image.png)
-
-- initially, I wanted to use images for `ship` and `shot` but those can be placed on the gameboard table only with `appendChild` inside the square cell, which made it a bit complicated, since my focus was on building the battleship logic and ai, so I have finally switched to just youse background-color property;
-
+- initially, I wanted to use images for `ship` and `shot` but those can be placed on the gameboard table only with `appendChild` inside the square cell, which made it a bit complicated, since my focus was on building the battleship logic and ai, so I have finally switched to only use` background-color` property;
+- `the most difficult part` of this project was definitely rendering the `2D Array` into the a table directly. Maybe my goal was set too high but I actually made it and it works smooth. (This stackOverflow helped me lots https://stackoverflow.com/questions/64284979/mapping-2d-array-javascript-into-html-table by Vishnu Shenoy). Additional to it I have used an object for the parameters since I have more than two parameters to keep it organzed. Thanks to [Carlos](https://github.com/bycdiaz) for the tip!
 
 #### General overlook of project progress
 
@@ -28,3 +25,7 @@
 ![Alt text](image-2.png)
 
 ![Alt text](image-5.png)
+
+![Alt text](image-3.png)
+- if a cell was attacked it will give it a class `attacked`, so it will not be possible to attack it again. With a while loop, the ai is set to attack until it finds a cell that was not attacked for its turn
+![Alt text](image-6.png)
