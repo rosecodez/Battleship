@@ -10,6 +10,13 @@ class Gameboard {
     this.grid = new Array(10).fill(0).map(() => new Array(10).fill(''));
   }
 
+  reset() {
+    this.ships = [];
+    this.shipsSunk = [];
+    this.missedShots = [];
+    this.grid = new Array(10).fill(0).map(() => new Array(10).fill(''));
+  }
+  
   isLegalCoordinates(coordinates) {
     const [x, y] = coordinates;
     if (x >= 0 && x <= 9 && y >= 0 && y <= 9) {

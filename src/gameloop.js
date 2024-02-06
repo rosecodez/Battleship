@@ -23,13 +23,15 @@ export default function gameLoop() {
   const dialog = document.querySelector('dialog');
   let dialogText = document.getElementById('end-text');
 
+  // text contents to update score
+  const h2Ai = document.getElementById("h2-ai");
+  const h2Player = document.getElementById("h2-player");
+
   // access ai cells looping through all cells
   for (let i = 0; i < aiCells.length; i++) {
     const aiCell = aiCells[i];
 
     aiCell.addEventListener('click', (e) => {
-      const h2Ai = document.getElementById("h2-ai");
-
       // get coordinates on clicked cell
       const x = e.target.parentElement.rowIndex;
       const y = e.target.cellIndex;
@@ -59,8 +61,6 @@ export default function gameLoop() {
       }
 
       // trigger a random attack for the AI when an aiCell is clicked by the user
-      const h2Player = document.getElementById("h2-player");
-
       while (true) {
         const randomX = Math.floor(Math.random() * 9);
         const randomY = Math.floor(Math.random() * 9);
@@ -88,20 +88,6 @@ export default function gameLoop() {
           // if player's or ai's all ships are sunk,
           if (playerGameboard.allSunk() || aiGameboard.allSunk() ) {
             gameOver();
-
-            if (playerGameboard.allSunk() ) {
-              // Check if every ship in playerGameboard is sunk
-              const playerWins = playerGameboard.ships.every(ship => ship.isSunk());
-              dialog.showModal();
-              if (playerWins) {
-                console.log("player wins");
-                dialogText.textContent = "Game over. Player wins";
-              } else {
-                console.log("computer wins!");
-                dialogText.textContent = "Game over. Ai wins";
-              }
-              
-            }
           }
         }
       // break out of the loop if the selected cell is already attacked
@@ -127,18 +113,55 @@ export default function gameLoop() {
     for (let i = 0; i < aiCells.length; i++) {
       aiCells[i].classList.remove('attacked');
     }
-
-
+    if (playerGameboard.allSunk() ) {
+      // Check if every ship in playerGameboard is sunk
+      const playerWins = playerGameboard.ships.every(ship => ship.isSunk());
+      dialog.showModal();
+      if (playerWins) {
+        console.log("player wins");
+        dialogText.textContent = "Game over. Player wins";
+      } else {
+        console.log("computer wins!");
+        dialogText.textContent = "Game over. Ai wins";
+      }
+      restartGame();
+    }
   }
 
-  // game score
-  // when all the ships of a player are sunk the other player wins
+  function restartGame() {
+    dialog.close();
+  
+    aiScore = 0;
+    playerScore = 0;
+  
+    h2Ai.innerHTML = "Player 2(Ai); Score: " + playerScore;
+    h2Player.innerHTML = "Player 1(Human); Score: " + aiScore;
+  
+    aiGameboard.reset();
+    playerGameboard.reset();
+  
+    // Reset UI elements
+    for (let i = 0; i < aiCells.length; i++) {
+      const aiCell = aiCells[i];
+      aiCell.classList.remove('attacked');
+      aiCell.style.pointerEvents = 'auto';
+      aiCell.style.opacity = '1';
+      aiCell.textContent = '';
+      aiCell.style.backgroundColor = "white";
+    }
+  
+    for (let i = 0; i < humanCells.length; i++) {
+      const humanCell = humanCells[i];
+      humanCell.classList.remove('attacked');
+      humanCell.innerHTML = "";
 
-  // 3.
-  // create conditions so that the game ends once one player's ships have all been sunk
-  // this function is appropriate for the game modules
+      if (humanCell.style.backgroundColor === 'blue') {
+        humanCell.style.backgroundColor = 'white';
+      } else if(humanCell.style.backgroundColor === 'red') {
+        humanCell.style.backgroundColor = "pink";
+      }
+      humanCell.style.pointerEvents = "none";
+    }
+  }
 
-  // game ends
-  // open module
-  // restart / play again
 }
