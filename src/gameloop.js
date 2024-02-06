@@ -19,6 +19,10 @@ export default function gameLoop() {
   let aiScore = 0;
   let playerScore = 0;
 
+  // modal for the end
+  const dialog = document.querySelector('dialog');
+  let dialogText = document.getElementById('end-text');
+
   // access ai cells looping through all cells
   for (let i = 0; i < aiCells.length; i++) {
     const aiCell = aiCells[i];
@@ -62,8 +66,8 @@ export default function gameLoop() {
         const randomY = Math.floor(Math.random() * 9);
         const randomCoordinates = [randomX, randomY];
         const humanShip = playerGameboard.grid[randomX][randomY];
+        console.log(playerGameboard);
         const randomHumanCell = humanCells[randomX * 9 + randomY];
-
         if (!randomHumanCell.classList.contains('attacked')) {
           let aiAttack = playerGameboard.receiveAttack(humanShip, randomCoordinates);
           randomHumanCell.classList.add('attacked');
@@ -82,14 +86,27 @@ export default function gameLoop() {
           }
 
           // if player's or ai's all ships are sunk,
-          if (playerGameboard.allSunk() || aiGameboard.allSunk()) {
-            // game is over
+          if (playerGameboard.allSunk() || aiGameboard.allSunk() ) {
             gameOver();
+
+            if (playerGameboard.allSunk() ) {
+              // Check if every ship in playerGameboard is sunk
+              const playerWins = playerGameboard.ships.every(ship => ship.isSunk());
+              dialog.showModal();
+              if (playerWins) {
+                console.log("player wins");
+                dialogText.textContent = "Game over. Player wins";
+              } else {
+                console.log("computer wins!");
+                dialogText.textContent = "Game over. Ai wins";
+              }
+              
+            }
           }
-          // break out of the loop if the selected cell is already attacked
-          // to prevent infinite loop
-          break;
         }
+      // break out of the loop if the selected cell is already attacked
+      // to prevent infinite loop
+      break;
       }
     });
   }
@@ -110,10 +127,8 @@ export default function gameLoop() {
     for (let i = 0; i < aiCells.length; i++) {
       aiCells[i].classList.remove('attacked');
     }
-    if(playerScore > aiScore) {
-      console.log("player wins!");
-    } else console.log("ai wins!")
-    console.log("Game over");
+
+
   }
 
   // game score

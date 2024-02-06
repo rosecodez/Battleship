@@ -57,3 +57,24 @@ td {
 #footer {
 	padding-top: 50px;
 }
+
+/* dialog */
+
+::backdrop, dialog + .backdrop {
+	background-color: rgb(158 158 158 / 61%);
+}
+dialog {
+	width: 362px;
+    margin-left: 950px;
+    margin-top: 385px;
+    height: 154px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+dialog::backdrop {
+	display: flex;
+}

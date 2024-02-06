@@ -10,7 +10,6 @@ class Ship {
     // eslint-disable-next-line no-plusplus
     this.timesHit++;
     if (this.timesHit >= this.length) {
-      // if all ships are sunk and true, player wins
       this.sunk = true;
     }
   }
