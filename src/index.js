@@ -1,6 +1,5 @@
 import './style.css';
 import gameLoop from './gameloop';
-import Ai from './Player';
 
 const Gameboard = require('./Gameboard');
 const Ship = require('./Ship');
@@ -27,7 +26,7 @@ export const fourSquareShipTwo = new Ship(4);
 export const fourSquareShipThree = new Ship(4);
 
 // functions to place ships for player and ai
-function createPlayerShips() {
+export function createPlayerShips() {
   playerGameboard.placeShip(oneSquareShip, [0, 0], 'vertical');
   playerGameboard.placeShip(oneSquareShipTwo, [6, 8], 'vertical');
   playerGameboard.placeShip(oneSquareShipThree, [2, 2], 'vertical');
@@ -42,7 +41,7 @@ function createPlayerShips() {
   playerGameboard.placeShip(fourSquareShipThree, [3, 6], 'vertical');
 }
 
-function createComputerShips() {
+export function createComputerShips() {
   aiGameboard.placeShip(oneSquareShip, [0, 4], 'vertical');
   aiGameboard.placeShip(oneSquareShipTwo, [9, 1], 'vertical');
   aiGameboard.placeShip(oneSquareShipThree, [1, 2], 'vertical');

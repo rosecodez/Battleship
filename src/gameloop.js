@@ -5,23 +5,20 @@
 // step back and figure out which class or module that function should belong to
 
 import { aiGameboard, playerGameboard } from '.';
-
+import { createComputerShips, createPlayerShips } from '.';
 const Gameboard = require('./Gameboard');
 const Ship = require('./Ship');
 const Player = require('./Player');
+
+// scores 
+let aiScore = 0;
+let playerScore = 0;
 
 export default function gameLoop() {
   // cell elements
   const humanCells = document.getElementsByClassName('human-cells');
   const aiCells = document.getElementsByClassName('ai-cells');
-
-  // scores 
-  let aiScore = 0;
-  let playerScore = 0;
-
-  // modal for the end
-  const dialog = document.querySelector('dialog');
-  let dialogText = document.getElementById('end-text');
+  
 
   // text contents to update score
   const h2Ai = document.getElementById("h2-ai");
@@ -110,58 +107,81 @@ export default function gameLoop() {
   }
 
   function gameOver() {
+    const dialog = document.querySelector('dialog');
+    // if the dialog is already open, return
+    if (dialog.open) {
+      return;
+    }
+    // remove attacked class from ai cells
     for (let i = 0; i < aiCells.length; i++) {
       aiCells[i].classList.remove('attacked');
     }
-    if (playerGameboard.allSunk() ) {
-      // Check if every ship in playerGameboard is sunk
-      const playerWins = playerGameboard.ships.every(ship => ship.isSunk());
+
+    // Check if either player or AI has all ships sunk
+    if (playerGameboard.allSunk() || aiGameboard.allSunk()) {
+      const dialogText = document.getElementById('end-text');
+    
       dialog.showModal();
-      if (playerWins) {
+      dialog.style.display = "flex";
+      if (aiGameboard.allSunk()) {
         console.log("player wins");
         dialogText.textContent = "Game over. Player wins";
       } else {
         console.log("computer wins!");
         dialogText.textContent = "Game over. Ai wins";
       }
-      restartGame();
+
+      const restartButton = document.getElementById('restart-button');
+      restartButton.addEventListener("click", restartGame);
+
     }
   }
+}
 
-  function restartGame() {
-    dialog.close();
-  
-    aiScore = 0;
-    playerScore = 0;
-  
-    h2Ai.innerHTML = "Player 2(Ai); Score: " + playerScore;
-    h2Player.innerHTML = "Player 1(Human); Score: " + aiScore;
-  
-    aiGameboard.reset();
-    playerGameboard.reset();
-  
-    // Reset UI elements
-    for (let i = 0; i < aiCells.length; i++) {
-      const aiCell = aiCells[i];
-      aiCell.classList.remove('attacked');
-      aiCell.style.pointerEvents = 'auto';
-      aiCell.style.opacity = '1';
-      aiCell.textContent = '';
-      aiCell.style.backgroundColor = "white";
-    }
-  
-    for (let i = 0; i < humanCells.length; i++) {
-      const humanCell = humanCells[i];
-      humanCell.classList.remove('attacked');
-      humanCell.innerHTML = "";
+function restartGame() {
+  const aiCells = document.getElementsByClassName('ai-cells');
+  const humanCells = document.getElementsByClassName('human-cells');
+  const h2Ai = document.getElementById("h2-ai");
+  const h2Player = document.getElementById("h2-player");
+  const dialog = document.querySelector('dialog');
 
-      if (humanCell.style.backgroundColor === 'blue') {
-        humanCell.style.backgroundColor = 'white';
-      } else if(humanCell.style.backgroundColor === 'red') {
-        humanCell.style.backgroundColor = "pink";
-      }
-      humanCell.style.pointerEvents = "none";
-    }
+  dialog.close();
+  dialog.style.display = "none"
+  // reset score
+  aiScore = 0;
+  playerScore = 0;
+
+  // reset text score 
+  h2Ai.innerHTML = "Player 2(Ai); Score: " + playerScore;
+  h2Player.innerHTML = "Player 1(Human); Score: " + aiScore;
+
+  aiGameboard.reset();
+  playerGameboard.reset();
+  
+  // create ships again
+  createPlayerShips();
+  createComputerShips();
+
+  // Reset UI elements
+  for (let i = 0; i < aiCells.length; i++) {
+    const aiCell = aiCells[i];
+    aiCell.classList.remove('attacked');
+    aiCell.style.pointerEvents = 'auto';
+    aiCell.style.opacity = '1';
+    aiCell.textContent = '';
+    aiCell.style.backgroundColor = "white";
   }
 
+  for (let i = 0; i < humanCells.length; i++) {
+    const humanCell = humanCells[i];
+    humanCell.classList.remove('attacked');
+    humanCell.innerHTML = "";
+
+    if (humanCell.style.backgroundColor === 'blue') {
+      humanCell.style.backgroundColor = 'white';
+    } else if(humanCell.style.backgroundColor === 'red') {
+      humanCell.style.backgroundColor = "pink";
+    }
+    humanCell.style.pointerEvents = "none";
+  }
 }

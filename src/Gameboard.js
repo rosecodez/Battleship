@@ -10,12 +10,6 @@ class Gameboard {
     this.grid = new Array(10).fill(0).map(() => new Array(10).fill(''));
   }
 
-  reset() {
-    this.ships = [];
-    this.shipsSunk = [];
-    this.missedShots = [];
-    this.grid = new Array(10).fill(0).map(() => new Array(10).fill(''));
-  }
   
   isLegalCoordinates(coordinates) {
     const [x, y] = coordinates;
@@ -97,6 +91,17 @@ class Gameboard {
 
   allSunk() {
     return this.ships.every((ship) => ship.isSunk());
+  }
+
+  reset() {
+    this.shipsSunk = [];
+    this.missedShots = [];
+    this.grid = new Array(10).fill(0).map(() => new Array(10).fill(''));
+    
+    this.ships.forEach(ship => {
+      ship.timesHit = 0;
+      ship.sunk = false;
+    });
   }
 }
 
