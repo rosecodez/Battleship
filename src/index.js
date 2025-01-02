@@ -30,7 +30,7 @@ export function createPlayerShips() {
   playerGameboard.placeShip(oneSquareShip, [0, 0], 'vertical');
   playerGameboard.placeShip(oneSquareShipTwo, [6, 8], 'vertical');
   playerGameboard.placeShip(oneSquareShipThree, [2, 2], 'vertical');
-  playerGameboard.placeShip(oneSquareShipFour, [0, 6], 'vertical'); 
+  playerGameboard.placeShip(oneSquareShipFour, [0, 6], 'vertical');
 
   playerGameboard.placeShip(twoSquareShipOne, [2, 4], 'horizontal');
   playerGameboard.placeShip(twoSquareShipTwo, [1, 8], 'horizontal');
@@ -45,7 +45,7 @@ export function createComputerShips() {
   aiGameboard.placeShip(oneSquareShip, [0, 4], 'vertical');
   aiGameboard.placeShip(oneSquareShipTwo, [9, 1], 'vertical');
   aiGameboard.placeShip(oneSquareShipThree, [1, 2], 'vertical');
-  aiGameboard.placeShip(oneSquareShipFour, [1, 1], 'vertical'); 
+  aiGameboard.placeShip(oneSquareShipFour, [1, 1], 'vertical');
 
   aiGameboard.placeShip(twoSquareShipOne, [2, 4], 'horizontal');
   aiGameboard.placeShip(twoSquareShipTwo, [1, 8], 'horizontal');
@@ -58,13 +58,14 @@ export function createComputerShips() {
 
 // function that takes the 2D array created in Gameboard.js constructors as parameter
 // and it renders it into a table and appends to the html
+
 function createTable({ tableData, grid, boolean }) {
-  if(boolean === true) {
+  if (boolean === true) {
     createPlayerShips();
   } else if (boolean === false) {
     createComputerShips();
   }
-  
+
   const table = document.createElement('table');
   const tableBody = document.createElement('tbody');
 
@@ -72,7 +73,7 @@ function createTable({ tableData, grid, boolean }) {
     const row = document.createElement('tr');
     rowData.forEach((cellData) => {
       const cell = document.createElement('td');
-      if(boolean === true) {
+      if (boolean === true) {
         cell.className = 'human-cells';
         table.id = 'human-table';
       } else if (boolean === false) {
@@ -87,19 +88,18 @@ function createTable({ tableData, grid, boolean }) {
 
   table.appendChild(tableBody);
   grid.appendChild(table);
-  
 }
 
 createTable({
   tableData: playerGameboard.grid,
   grid: humanGrid,
-  boolean: true
+  boolean: true,
 });
 
 createTable({
   tableData: aiGameboard.grid,
   grid: aiGrid,
-  boolean: false
+  boolean: false,
 });
 
 gameLoop();

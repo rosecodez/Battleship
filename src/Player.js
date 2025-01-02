@@ -1,8 +1,9 @@
 /* eslint-disable no-bitwise */
 /* eslint-disable no-plusplus */
 /* eslint-disable max-classes-per-file */
-const Gameboard = require('./Gameboard');
-const Ship = require('./Ship');
+
+const Gameboard = require("./Gameboard");
+const Ship = require("./Ship");
 
 class Player {
   constructor(name) {
@@ -22,13 +23,14 @@ class Player {
 class Ai extends Player {
   getRandomPlace() {
     const ship = new Ship(Math.floor(Math.random() * 4));
-    
+
     const x = Math.floor(Math.random() * 9);
     const y = Math.floor(Math.random() * 9);
     const coordinates = [x, y];
 
-    const directions = ['horizontal', 'vertical'];
-    const directionChoice = directions[Math.floor(Math.random() * directions.length)];
+    const directions = ["horizontal", "vertical"];
+    const directionChoice =
+      directions[Math.floor(Math.random() * directions.length)];
 
     return this.placeShip(ship, coordinates, directionChoice);
   }
