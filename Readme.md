@@ -1,7 +1,16 @@
 ### Battleship
 
 #### Description
+
 - this project implements the classic game 'Battleship', that has 2 players, ruled grid on which each player's fleet of warships are marked. The locations of the fleets are concealed from the other player. Players alternate turns calling "shots" at the other player's ships, and the objective of the game is to destroy the opposing player's fleet.
+
+#### Technologies used
+
+#### Setup and installation
+
+#### The game in action
+
+- gif
 
 #### Difficulties encountered
 
@@ -27,5 +36,21 @@
 ![Alt text](image-5.png)
 
 ![Alt text](image-3.png)
+
 - if a cell was attacked it will give it a class `attacked`, so it will not be possible to attack it again. With a while loop, the ai is set to attack until it finds a cell that was not attacked for its turn
-![Alt text](image-6.png)
+  ![Alt text](image-6.png)
+
+After coming back to battleship after 1 year:
+
+#### Improvements needed
+
+- add a delay between player and ai move to make sure a move is not skipped
+- remove "[object object]" writing at ai table so player where the ship is / just change mouse style over might be more simple
+
+![alt text](image-7.png)
+
+- change blue color for miss since dark writing is not very readable on a dark blue font
+
+- enhance the ui with animations, transitions, visual feedback for hits, misses
+
+- deploy it

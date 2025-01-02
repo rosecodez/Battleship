@@ -1,6 +1,6 @@
-const Ship = require('../src/Ship');
+const Ship = require("../src/Ship");
 
-test('attacking ship 4 times leads to sinking it', () => {
+test("attacking ship 4 times leads to sinking it", () => {
   const testShip = new Ship(4);
   testShip.hit();
   testShip.hit();
@@ -9,7 +9,7 @@ test('attacking ship 4 times leads to sinking it', () => {
   testShip.isSunk();
   expect(testShip.isSunk()).toBeTruthy();
 });
-test('ship is attacked once', () => {
+test("ship is attacked once", () => {
   const testShip = new Ship(4);
   testShip.hit();
   expect(testShip.isHit()).toBeTruthy();
