@@ -64,6 +64,7 @@ td {
 ::backdrop, dialog + .backdrop {
 	background-color: rgb(158 158 158 / 61%);
 }
+
 dialog {
 	width: 362px;
     margin-left: 950px;

@@ -1,12 +1,15 @@
 import "./style.css";
+import { restartGame } from "./gameloop";
 import gameLoop from "./gameloop";
 
 const Gameboard = require("./Gameboard");
 const Ship = require("./Ship");
 const Player = require("./Player");
 
-const humanGrid = document.getElementById("human-grid");
-const aiGrid = document.getElementById("ai-grid");
+export const humanGrid = document.getElementById("human-grid");
+export const aiGrid = document.getElementById("ai-grid");
+
+const resetGameBtn = document.getElementById("resetGameBtn");
 
 const playerGameboard = new Gameboard();
 const aiGameboard = new Gameboard();
@@ -59,10 +62,10 @@ export function createComputerShips() {
 // function that takes the 2D array created in Gameboard.js constructors as parameter
 // and it renders it into a table and appends to the html
 
-function createTable({ tableData, grid, boolean }) {
-  if (boolean === true) {
+export function createTable({ tableData, grid, isPlayer }) {
+  if (isPlayer === true) {
     createPlayerShips();
-  } else if (boolean === false) {
+  } else if (isPlayer === false) {
     createComputerShips();
   }
 
@@ -73,10 +76,10 @@ function createTable({ tableData, grid, boolean }) {
     const row = document.createElement("tr");
     rowData.forEach((cellData) => {
       const cell = document.createElement("td");
-      if (boolean === true) {
+      if (isPlayer === true) {
         cell.className = "human-cells";
         table.id = "human-table";
-      } else if (boolean === false) {
+      } else if (isPlayer === false) {
         cell.className = "ai-cells";
         table.id = "ai-table";
       }
@@ -90,18 +93,23 @@ function createTable({ tableData, grid, boolean }) {
   grid.appendChild(table);
 }
 
-createTable({
-  tableData: playerGameboard.grid,
-  grid: humanGrid,
-  boolean: true,
-});
+export function createTables() {
+  createTable({
+    tableData: playerGameboard.grid,
+    grid: humanGrid,
+    isPlayer: true,
+  });
 
-createTable({
-  tableData: aiGameboard.grid,
-  grid: aiGrid,
-  boolean: false,
-});
+  createTable({
+    tableData: aiGameboard.grid,
+    grid: aiGrid,
+    isPlayer: false,
+  });
+}
 
+createTables();
 gameLoop();
+
+resetGameBtn.addEventListener("click", restartGame);
 
 export { playerGameboard, aiGameboard };
