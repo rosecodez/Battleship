@@ -96,6 +96,7 @@ class Gameboard {
   }
 
   reset() {
+    this.ships = [];
     this.shipsSunk = [];
     this.missedShots = [];
     this.grid = new Array(10).fill(0).map(() => new Array(10).fill(""));
