@@ -45,11 +45,14 @@ After coming back to battleship after 1 year:
 #### Improvements needed
 
 - add a delay between player and ai move to make sure a move is not skipped
-- remove "[object object]" writing at ai table so player where the ship is / just change mouse style over might be more simple
+
+- remove "[object object]" writing at ai table so player where the ship is / just change mouse style ✅
 
 ![alt text](image-7.png)
 
 - change blue color for miss since dark writing is not very readable on a dark blue font
+
+- create reset button
 
 - enhance the ui with animations, transitions, visual feedback for hits, misses
 
