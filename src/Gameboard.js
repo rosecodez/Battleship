@@ -74,7 +74,7 @@ class Gameboard {
 
     if (this.alreadyShot(coordinates)) {
       console.error("Already shot");
-      return this.grid;
+      return this.grid.coordinates;
     }
 
     if (this.grid[x][y] === "") {
