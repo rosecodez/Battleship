@@ -68,7 +68,7 @@ export default function gameLoop() {
         aiCell.style.pointerEvents = "none";
         aiCell.style.opacity = "1";
         aiCell.textContent = "miss";
-        aiCell.style.backgroundColor = "blue";
+        aiCell.style.backgroundColor = "green";
       }
 
       // trigger a random attack for the AI when an aiCell is clicked by the user
@@ -88,13 +88,13 @@ export default function gameLoop() {
 
           // handle the result of the AI attack
           if (aiAttack) {
-            if (randomHumanCell.style.backgroundColor === "pink") {
+            if (randomHumanCell.style.backgroundColor === "lightblue") {
               randomHumanCell.style.backgroundColor = "red";
               aiScore++;
               h2Player.innerHTML = `Ai score: ` + `${aiScore}`;
               randomHumanCell.innerHTML = "ship";
             } else if (randomHumanCell.style.backgroundColor !== "red") {
-              randomHumanCell.style.backgroundColor = "blue";
+              randomHumanCell.style.backgroundColor = "green";
               randomHumanCell.innerHTML = "miss";
             }
           }
@@ -116,7 +116,7 @@ export default function gameLoop() {
     const humanCell = humanCells[i];
 
     if (humanCell.innerHTML === "[object Object]") {
-      humanCell.style.backgroundColor = "pink";
+      humanCell.style.backgroundColor = "lightblue";
       humanCell.innerHTML = "";
     }
     // user cannot click on his own grid cells

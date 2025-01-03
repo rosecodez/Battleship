@@ -2,7 +2,7 @@
 /* eslint-disable no-plusplus */
 
 const Ship = require("./Ship");
-
+const Player = require("./Player");
 class Gameboard {
   constructor() {
     this.ships = [];
@@ -38,6 +38,24 @@ class Gameboard {
     return false;
   }
 
+  isOverlapping(ship, coordinates, direction) {
+    const [x, y] = coordinates;
+
+    if (direction === "horizontal") {
+      for (let i = 0; i < ship.length; i++) {
+        if (this.grid[x][y + 1] !== "") {
+          return true;
+        }
+      }
+    } else if (direction === "horizontal") {
+      for (let i = 0; i < ship.length; i++) {
+        if (this.grid[x + i][y] !== "") {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
   placeShip(ship, coordinates, direction) {
     if (
       !this.isLegalCoordinates(coordinates) &&
@@ -95,16 +113,32 @@ class Gameboard {
     return this.ships.every((ship) => ship.isSunk());
   }
 
-  reset() {
-    this.ships = [];
-    this.shipsSunk = [];
-    this.missedShots = [];
-    this.grid = new Array(10).fill(0).map(() => new Array(10).fill(""));
+  getRandomPlace(ship) {
+    const x = Math.floor(Math.random() * 9);
+    const y = Math.floor(Math.random() * 9);
+    const coordinates = [x, y];
+    const directions = ["horizontal", "vertical"];
 
+    const directionChoice =
+      directions[Math.floor(Math.random() * directions.length)];
+
+    if (
+      this.isLegalCoordinates(coordinates) &&
+      this.shipOutOfBounds(ship, coordinates, directionChoice)
+    ) {
+      return this.placeShip(ship, coordinates, directionChoice);
+    }
+  }
+
+  reset() {
     this.ships.forEach((ship) => {
       ship.timesHit = 0;
       ship.sunk = false;
     });
+    this.ships = [];
+    this.shipsSunk = [];
+    this.missedShots = [];
+    this.grid = new Array(10).fill(0).map(() => new Array(10).fill(""));
   }
 }
 

@@ -45,18 +45,18 @@ export function createPlayerShips() {
 }
 
 export function createComputerShips() {
-  aiGameboard.placeShip(oneSquareShip, [0, 4], "vertical");
-  aiGameboard.placeShip(oneSquareShipTwo, [9, 1], "vertical");
-  aiGameboard.placeShip(oneSquareShipThree, [1, 2], "vertical");
-  aiGameboard.placeShip(oneSquareShipFour, [1, 1], "vertical");
+  aiGameboard.getRandomPlace(oneSquareShip);
+  aiGameboard.getRandomPlace(oneSquareShipTwo);
+  aiGameboard.getRandomPlace(oneSquareShipThree);
+  aiGameboard.getRandomPlace(oneSquareShipFour);
 
-  aiGameboard.placeShip(twoSquareShipOne, [2, 4], "horizontal");
-  aiGameboard.placeShip(twoSquareShipTwo, [1, 8], "horizontal");
-  aiGameboard.placeShip(twoSquareShipThree, [7, 1], "horizontal");
+  aiGameboard.getRandomPlace(twoSquareShipOne);
+  aiGameboard.getRandomPlace(twoSquareShipTwo);
+  aiGameboard.getRandomPlace(twoSquareShipThree);
 
-  aiGameboard.placeShip(fourSquareShipOne, [8, 4], "horizontal");
-  aiGameboard.placeShip(fourSquareShipTwo, [3, 3], "vertical");
-  aiGameboard.placeShip(fourSquareShipThree, [5, 6], "horizontal");
+  aiGameboard.getRandomPlace(fourSquareShipOne);
+  aiGameboard.getRandomPlace(fourSquareShipTwo);
+  aiGameboard.getRandomPlace(fourSquareShipThree);
 }
 
 // function that takes the 2D array created in Gameboard.js constructors as parameter

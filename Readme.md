@@ -57,3 +57,9 @@ After coming back to battleship after 1 year:
 - enhance the ui with animations, transitions, visual feedback for hits, misses
 
 - deploy it
+
+##### Freeware, Non-Commercial Credits
+
+Font: [Juvanze](https://www.fontspace.com/j-juvanze-font-f112038)
+
+Background image: [CraftPix.net 2D Game Assets](https://opengameart.org/users/craftpixnet-2d-game-assets)

@@ -1,21 +1,36 @@
+@font-face {
+	font-family: 'Battleship';
+	src: url('./fonts/Juvanze-ovw9A.otf') format('truetype');
+}
 * {
 	margin: 0;
 	padding: 0;
 }
 body {
+	font-family: 'Battleship';
+	background-image: url("./images/pixel_ocean_and_sky_background2.png");
+	background-repeat: no-repeat;
+	background-size: cover;
 	display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
 	padding: 75px;
+	letter-spacing: 2px;
+	word-spacing: 4px;
 }
 
 /* header */
 #header {
 	padding-bottom: 20px;
 }
-h1{
-	font-size: 35px;
+
+h1 {
+	
+	font-size: 60px;
+}
+h2 {
+	font-size: 30px;
 }
 
 /* content */
@@ -38,11 +53,17 @@ table, td, th {
 #ai-cells {
 	display: none;
 }
+td {
+	background-image: url("./images/21-48-10-87_512.webp"); 
+	background-position: bottom;
+}
+
 td.ai-cells {
-	opacity: 0;
 	cursor: alias;
+
 }
 table {
+	
 	border-collapse: collapse;
 	text-align: center;
 	display: inline-table;
