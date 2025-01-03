@@ -23,17 +23,13 @@ class Gameboard {
     const [x, y] = coordinates;
 
     if (direction === "horizontal") {
-      const maxLeftAndRightValue = coordinates[1] + (ship.length - 1);
-      if (this.isLegalCoordinates([x, maxLeftAndRightValue])) {
-        return true;
-      }
+      const maxY = y + (ship.length - 1);
+      return maxY > 9;
     }
 
     if (direction === "vertical") {
-      const maxUpAndDownValue = coordinates[0] + (ship.length - 1);
-      if (this.isLegalCoordinates([maxUpAndDownValue, y])) {
-        return true;
-      }
+      const maxX = x + (ship.length - 1);
+      return maxX > 9;
     }
     return false;
   }
@@ -43,40 +39,50 @@ class Gameboard {
 
     if (direction === "horizontal") {
       for (let i = 0; i < ship.length; i++) {
-        if (this.grid[x][y + 1] !== "") {
+        if (
+          !this.isLegalCoordinates([x, y + i]) ||
+          this.grid[x][y + i] !== ""
+        ) {
           return true;
         }
       }
-    } else if (direction === "horizontal") {
+    } else if (direction === "vertical") {
       for (let i = 0; i < ship.length; i++) {
-        if (this.grid[x + i][y] !== "") {
+        if (
+          !this.isLegalCoordinates([x + i, y]) ||
+          this.grid[x + i][y] !== ""
+        ) {
           return true;
         }
       }
     }
     return false;
   }
-  placeShip(ship, coordinates, direction) {
-    if (
-      !this.isLegalCoordinates(coordinates) &&
-      !this.shipOutOfBounds(ship, coordinates, direction)
-    ) {
-      throw new Error("coordinates are higher than board row/column ");
-    } else {
-      const [x, y] = coordinates;
-      if (direction === "vertical") {
-        for (let i = 0; i < ship.length; i++) {
-          this.grid[x + i][y] = ship;
-        }
-        this.ships.push(ship);
-      } else {
-        for (let i = 0; i < ship.length; i++) {
-          this.grid[x][y + i] = ship;
-        }
-        this.ships.push(ship);
-      }
-      return this.grid;
+
+  validateCoordinates(ship, coordinates, direction) {
+    if (this.shipOutOfBounds(ship, coordinates, direction)) {
+      throw new Error("ship placement is out of bounds");
     }
+    if (this.isOverlapping(ship, coordinates, direction)) {
+      throw new Error("ship placement is overlapping");
+    }
+  }
+
+  placeShip(ship, coordinates, direction) {
+    this.validateCoordinates(ship, coordinates, direction);
+
+    const [x, y] = coordinates;
+    if (direction === "vertical") {
+      for (let i = 0; i < ship.length; i++) {
+        this.grid[x + i][y] = ship;
+      }
+    } else {
+      for (let i = 0; i < ship.length; i++) {
+        this.grid[x][y + i] = ship;
+      }
+    }
+    this.ships.push(ship);
+    return this.grid;
   }
 
   alreadyShot(coordinates) {
@@ -114,20 +120,24 @@ class Gameboard {
   }
 
   getRandomPlace(ship) {
-    const x = Math.floor(Math.random() * 9);
-    const y = Math.floor(Math.random() * 9);
-    const coordinates = [x, y];
-    const directions = ["horizontal", "vertical"];
+    let attempts = 0;
+    while (attempts < 50) {
+      const x = Math.floor(Math.random() * 10);
+      const y = Math.floor(Math.random() * 10);
+      const coordinates = [x, y];
+      const directions = ["horizontal", "vertical"];
 
-    const directionChoice =
-      directions[Math.floor(Math.random() * directions.length)];
+      const directionChoice =
+        directions[Math.floor(Math.random() * directions.length)];
 
-    if (
-      this.isLegalCoordinates(coordinates) &&
-      this.shipOutOfBounds(ship, coordinates, directionChoice)
-    ) {
-      return this.placeShip(ship, coordinates, directionChoice);
+      try {
+        this.placeShip(ship, coordinates, directionChoice);
+        return;
+      } catch (error) {
+        attempts++;
+      }
     }
+    throw new Error("get random place fail");
   }
 
   reset() {
@@ -135,6 +145,7 @@ class Gameboard {
       ship.timesHit = 0;
       ship.sunk = false;
     });
+
     this.ships = [];
     this.shipsSunk = [];
     this.missedShots = [];
