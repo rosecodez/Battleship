@@ -15,49 +15,50 @@ const playerGameboard = new Gameboard();
 const aiGameboard = new Gameboard();
 
 // each player will have 4 ship x 1square, 3 ship x 4square, 3 ship x 2square
-const playerOneSquareShip = new Ship(1);
-const playerOneSquareShipTwo = new Ship(1);
-const playerOneSquareShipThree = new Ship(1);
-const playerOneSquareShipFour = new Ship(1);
-
-const playerTwoSquareShipOne = new Ship(2);
-const playerTwoSquareShipTwo = new Ship(2);
-const playerTwoSquareShipThree = new Ship(2);
-
-const playerFourSquareShipOne = new Ship(4);
-const playerFourSquareShipTwo = new Ship(4);
-const playerFourSquareShipThree = new Ship(4);
-
-const aiOneSquareShip = new Ship(1);
-const aiOneSquareShipTwo = new Ship(1);
-const aiOneSquareShipThree = new Ship(1);
-const aiOneSquareShipFour = new Ship(1);
-
-const aiTwoSquareShipOne = new Ship(2);
-const aiTwoSquareShipTwo = new Ship(2);
-const aiTwoSquareShipThree = new Ship(2);
-
-const aiFourSquareShipOne = new Ship(4);
-const aiFourSquareShipTwo = new Ship(4);
-const aiFourSquareShipThree = new Ship(4);
-
 // functions to place ships for player and ai
 export function createPlayerShips() {
-  playerGameboard.placeShip(playerOneSquareShip, [0, 0], "vertical");
-  playerGameboard.placeShip(playerOneSquareShipTwo, [6, 8], "vertical");
-  playerGameboard.placeShip(playerOneSquareShipThree, [2, 2], "vertical");
-  playerGameboard.placeShip(playerOneSquareShipFour, [0, 6], "vertical");
+  console.log("Grid before placing player ships:", playerGameboard.grid);
+  const playerOneSquareShip = new Ship(1);
+  const playerOneSquareShipTwo = new Ship(1);
+  const playerOneSquareShipThree = new Ship(1);
+  const playerOneSquareShipFour = new Ship(1);
 
-  playerGameboard.placeShip(playerTwoSquareShipOne, [2, 4], "horizontal");
-  playerGameboard.placeShip(playerTwoSquareShipTwo, [1, 8], "horizontal");
-  playerGameboard.placeShip(playerTwoSquareShipThree, [7, 1], "horizontal");
+  const playerTwoSquareShipOne = new Ship(2);
+  const playerTwoSquareShipTwo = new Ship(2);
+  const playerTwoSquareShipThree = new Ship(2);
 
-  playerGameboard.placeShip(playerFourSquareShipOne, [8, 4], "horizontal");
-  playerGameboard.placeShip(playerFourSquareShipTwo, [4, 0], "horizontal");
-  playerGameboard.placeShip(playerFourSquareShipThree, [3, 6], "vertical");
+  const playerFourSquareShipOne = new Ship(4);
+  const playerFourSquareShipTwo = new Ship(4);
+  const playerFourSquareShipThree = new Ship(4);
+
+  playerGameboard.getRandomPlace(playerOneSquareShip);
+  playerGameboard.getRandomPlace(playerOneSquareShipTwo);
+  playerGameboard.getRandomPlace(playerOneSquareShipThree);
+  playerGameboard.getRandomPlace(playerOneSquareShipFour);
+
+  playerGameboard.getRandomPlace(playerTwoSquareShipOne);
+  playerGameboard.getRandomPlace(playerTwoSquareShipTwo);
+  playerGameboard.getRandomPlace(playerTwoSquareShipThree);
+
+  playerGameboard.getRandomPlace(playerFourSquareShipOne);
+  playerGameboard.getRandomPlace(playerFourSquareShipTwo);
+  playerGameboard.getRandomPlace(playerFourSquareShipThree);
 }
 
 export function createComputerShips() {
+  const aiOneSquareShip = new Ship(1);
+  const aiOneSquareShipTwo = new Ship(1);
+  const aiOneSquareShipThree = new Ship(1);
+  const aiOneSquareShipFour = new Ship(1);
+
+  const aiTwoSquareShipOne = new Ship(2);
+  const aiTwoSquareShipTwo = new Ship(2);
+  const aiTwoSquareShipThree = new Ship(2);
+
+  const aiFourSquareShipOne = new Ship(4);
+  const aiFourSquareShipTwo = new Ship(4);
+  const aiFourSquareShipThree = new Ship(4);
+
   aiGameboard.getRandomPlace(aiOneSquareShip);
   aiGameboard.getRandomPlace(aiOneSquareShipTwo);
   aiGameboard.getRandomPlace(aiOneSquareShipThree);

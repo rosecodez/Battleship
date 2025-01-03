@@ -34,6 +34,7 @@ const h2Player = document.getElementById("h2-player");
 
 const dialog = document.querySelector("dialog");
 const dialogText = document.getElementById("end-text");
+const restartButton = document.getElementById("restart-button");
 
 export default function gameLoop() {
   // text contents to update score
@@ -151,6 +152,8 @@ export default function gameLoop() {
 }
 
 export function restartGame() {
+  console.log(aiGameboard);
+  console.log(playerGameboard);
   dialog.close();
   dialog.style.display = "none";
 

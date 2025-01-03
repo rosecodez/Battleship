@@ -103,7 +103,7 @@ class Gameboard {
 
     if (this.grid[x][y] === "") {
       this.grid[x][y] = "x";
-      this.missedShots.push(this.grid[x][y]);
+      this.missedShots.push(coordinates);
     } else if (ship instanceof Ship) {
       this.shipsSunk.push(this.grid[x][y]);
       ship.hit();
@@ -150,6 +150,7 @@ class Gameboard {
     this.shipsSunk = [];
     this.missedShots = [];
     this.grid = new Array(10).fill(0).map(() => new Array(10).fill(""));
+    console.log("Grid after reset:", this.grid);
   }
 }
 
