@@ -18,7 +18,8 @@ import {
   aiGrid,
 } from ".";
 import crosshair from "./images/crosshair.png";
-
+import explosion from "./images/explosion.gif";
+import battleship from "./images/battleship.png";
 const Gameboard = require("./Gameboard");
 const Ship = require("./Ship");
 const Player = require("./Player");
@@ -41,6 +42,10 @@ const crosshairImg = document.createElement("img");
 crosshairImg.src = crosshair;
 crosshairImg.style.width = "40px";
 crosshairImg.style.pointerEvents = "none";
+
+const explosionGif = document.createElement("img");
+explosionGif.src = explosion;
+explosionGif.style.width = "60px";
 
 export default function gameLoop() {
   // access ai cells looping through all cells
@@ -83,8 +88,23 @@ export default function gameLoop() {
       // give ai cell attacked classlist
       aiCell.classList.add("attacked");
       aiGameboard.receiveAttack(ship, coordinates);
+      e.target.style.pointerEvents = "none";
       if (aiCell.dataset.hasShip === "true") {
-        aiCell.textContent = "Hit";
+        const explosionGifClone = explosionGif.cloneNode(true);
+        aiCell.appendChild(explosionGifClone);
+
+        const crosshair = e.target.querySelector(".crosshair");
+        if (crosshair) {
+          e.target.removeChild(crosshair);
+        }
+        setTimeout(() => {
+          aiCell.removeChild(explosionGifClone);
+          const battleshipImg = document.createElement("img");
+          battleshipImg.src = battleship;
+          battleshipImg.style.width = "45px";
+          e.target.appendChild(battleshipImg);
+        }, 2800);
+
         playerScore++;
         h2Ai.innerHTML = `Human score: ` + `${playerScore}`;
       } else {
