@@ -11,8 +11,6 @@
 import {
   aiGameboard,
   playerGameboard,
-  createComputerShips,
-  createPlayerShips,
   createTables,
   humanGrid,
   aiGrid,
@@ -122,9 +120,18 @@ export default function gameLoop() {
 
           const ship = playerGameboard.grid[randomX][randomY];
           const isHit = playerGameboard.receiveAttack(ship, [randomX, randomY]);
-
+          randomHumanCell.textContent = "";
           if (isHit) {
-            randomHumanCell.textContent = "Hit";
+            const explosionGifClone = explosionGif.cloneNode(true);
+            randomHumanCell.appendChild(explosionGifClone);
+            setTimeout(() => {
+              randomHumanCell.removeChild(explosionGifClone);
+              const battleshipImg = document.createElement("img");
+              battleshipImg.src = battleship;
+              battleshipImg.style.width = "45px";
+
+              randomHumanCell.appendChild(battleshipImg);
+            }, 2800);
             aiScore++;
             h2Player.innerHTML = `AI score: ${aiScore}`;
           } else {

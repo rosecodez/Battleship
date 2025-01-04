@@ -98,6 +98,8 @@ export function createTable({ tableData, grid, isPlayer }) {
         if (cellData instanceof Ship) {
           cell.dataset.hasShip = "true";
           cell.textContent = "Ship";
+          cell.style.color = "lightblue";
+          cell.style.borderColor = "black";
         } else {
           cell.dataset.hasShip = "false";
           cell.textContent = cellData;
