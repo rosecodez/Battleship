@@ -17,6 +17,7 @@ import {
   humanGrid,
   aiGrid,
 } from ".";
+import crosshair from "./images/crosshair.png";
 
 const Gameboard = require("./Gameboard");
 const Ship = require("./Ship");
@@ -36,10 +37,34 @@ const dialog = document.querySelector("dialog");
 const dialogText = document.getElementById("end-text");
 const restartButton = document.getElementById("restart-button");
 
+const crosshairImg = document.createElement("img");
+crosshairImg.src = crosshair;
+crosshairImg.style.width = "40px";
+crosshairImg.style.pointerEvents = "none";
+
 export default function gameLoop() {
   // access ai cells looping through all cells
   for (let i = 0; i < aiCells.length; i++) {
     const aiCell = aiCells[i];
+
+    // crosshair logic
+    aiCell.addEventListener("mouseover", (e) => {
+      // ignore event if the cell was already attacked
+      if (aiCell.classList.contains("attacked")) {
+        return;
+      }
+      // clone crosshair image to ensure each cell has its own one
+      const crosshairClone = crosshairImg.cloneNode(true);
+      crosshairClone.classList.add("crosshair");
+      e.target.appendChild(crosshairClone);
+    });
+
+    aiCell.addEventListener("mouseout", (e) => {
+      const crosshair = e.target.querySelector(".crosshair");
+      if (crosshair) {
+        e.target.removeChild(crosshair);
+      }
+    });
 
     aiCell.addEventListener("click", (e) => {
       // get coordinates on clicked cell
