@@ -17,7 +17,6 @@ const aiGameboard = new Gameboard();
 // each player will have 4 ship x 1square, 3 ship x 4square, 3 ship x 2square
 // functions to place ships for player and ai
 export function createPlayerShips() {
-  console.log("Grid before placing player ships:", playerGameboard.grid);
   const playerOneSquareShip = new Ship(1);
   const playerOneSquareShipTwo = new Ship(1);
   const playerOneSquareShipThree = new Ship(1);
@@ -91,24 +90,27 @@ export function createTable({ tableData, grid, isPlayer }) {
 
     rowData.forEach((cellData) => {
       const cell = document.createElement("td");
+
       if (isPlayer === true) {
         cell.className = "human-cells";
         table.id = "human-table";
 
-        if (typeof cellData === "object" && cellData !== null) {
+        if (cellData instanceof Ship) {
           cell.dataset.hasShip = "true";
           cell.textContent = "Ship";
         } else {
+          cell.dataset.hasShip = "false";
           cell.textContent = cellData;
         }
       } else if (isPlayer === false) {
         cell.className = "ai-cells";
         table.id = "ai-table";
 
-        if (typeof cellData === "object" && cellData !== null) {
+        if (cellData instanceof Ship) {
           cell.dataset.hasShip = "true";
           cell.textContent = "";
         } else {
+          cell.dataset.hasShip = "false";
           cell.textContent = "";
         }
       }

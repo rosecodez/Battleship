@@ -97,22 +97,18 @@ class Gameboard {
     const [x, y] = coordinates;
 
     if (this.alreadyShot(coordinates)) {
-      console.error("Already shot");
-      return this.grid.coordinates;
+      return false;
     }
 
-    if (this.grid[x][y] === "") {
+    if (this.grid[x][y] instanceof Ship) {
+      this.grid[x][y].hit();
       this.grid[x][y] = "x";
-      this.missedShots.push(coordinates);
-    } else if (ship instanceof Ship) {
-      this.shipsSunk.push(this.grid[x][y]);
-      ship.hit();
+      return true;
     } else {
-      console.error("Invalid parameter for receive attack");
-      return this.grid;
+      this.grid[x][y] = "";
+      this.missedShots.push(coordinates);
+      return false;
     }
-
-    return this.grid;
   }
 
   allSunk() {
@@ -150,7 +146,6 @@ class Gameboard {
     this.shipsSunk = [];
     this.missedShots = [];
     this.grid = new Array(10).fill(0).map(() => new Array(10).fill(""));
-    console.log("Grid after reset:", this.grid);
   }
 }
 

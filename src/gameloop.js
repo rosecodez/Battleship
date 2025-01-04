@@ -53,6 +53,7 @@ export default function gameLoop() {
       if (aiCell.classList.contains("attacked")) {
         return;
       }
+
       // clone crosshair image to ensure each cell has its own one
       const crosshairClone = crosshairImg.cloneNode(true);
       crosshairClone.classList.add("crosshair");
@@ -81,10 +82,9 @@ export default function gameLoop() {
 
       // give ai cell attacked classlist
       aiCell.classList.add("attacked");
-
+      aiGameboard.receiveAttack(ship, coordinates);
       if (aiCell.dataset.hasShip === "true") {
         aiCell.textContent = "Hit";
-        aiGameboard.receiveAttack(ship, coordinates);
         playerScore++;
         h2Ai.innerHTML = `Human score: ` + `${playerScore}`;
       } else {
@@ -95,20 +95,22 @@ export default function gameLoop() {
       while (true) {
         const randomX = Math.floor(Math.random() * 9);
         const randomY = Math.floor(Math.random() * 9);
-        console.log(playerGameboard);
         const randomHumanCell = humanCells[randomX * 9 + randomY];
 
         if (!randomHumanCell.classList.contains("attacked")) {
           randomHumanCell.classList.add("attacked");
 
-          // handle the result of the AI attack
-          if (randomHumanCell.dataset.hasShip === "true") {
+          const ship = playerGameboard.grid[randomX][randomY];
+          const isHit = playerGameboard.receiveAttack(ship, [randomX, randomY]);
+
+          if (isHit) {
             randomHumanCell.textContent = "Hit";
             aiScore++;
-            h2Player.innerHTML = `Ai score: ` + `${aiScore}`;
+            h2Player.innerHTML = `AI score: ${aiScore}`;
           } else {
             randomHumanCell.textContent = "Miss";
           }
+
           break;
         }
       }
@@ -164,10 +166,6 @@ export function restartGame() {
   // reset gameboards
   aiGameboard.reset();
   playerGameboard.reset();
-
-  // create ships again
-  createPlayerShips();
-  createComputerShips();
 
   aiGrid.innerHTML = "";
   humanGrid.innerHTML = "";
