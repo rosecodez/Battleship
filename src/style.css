@@ -60,7 +60,6 @@ td {
 
 td.ai-cells {
 	cursor: alias;
-
 }
 table {
 	
@@ -75,6 +74,32 @@ table {
 td {
 	height: 50px;
 }
+#resetGameBtn{
+	font-family: 'Battleship';
+	display: inline-block;
+	padding: 15px 25px;
+	font-size: 24px;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+	background-color: #0c55c2;
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 5px #7e5f5f;
+}
+
+#resetGameBtn:hover {
+	background-color: #0c55c2
+}
+
+#resetGameBtn:active {
+  background-color: #0c55c2;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 /* footer */
 #footer {
 	padding-top: 50px;

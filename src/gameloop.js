@@ -37,8 +37,6 @@ const dialogText = document.getElementById("end-text");
 const restartButton = document.getElementById("restart-button");
 
 export default function gameLoop() {
-  // text contents to update score
-
   // access ai cells looping through all cells
   for (let i = 0; i < aiCells.length; i++) {
     const aiCell = aiCells[i];
@@ -50,78 +48,51 @@ export default function gameLoop() {
       const coordinates = [x, y];
 
       const ship = aiGameboard.grid[x][y];
+
       if (aiCell.classList.contains("attacked")) {
         // Ignore the click if the cell has already been attacked
         return;
       }
+
       // give ai cell attacked classlist
       aiCell.classList.add("attacked");
-      const attack = aiGameboard.receiveAttack(ship, coordinates);
 
-      if (attack && aiCell.innerHTML == "[object Object]") {
-        aiCell.style.pointerEvents = "none";
-        aiCell.style.opacity = "1";
-        aiCell.textContent = "ship";
-        aiCell.style.backgroundColor = "red";
+      if (aiCell.dataset.hasShip === "true") {
+        aiCell.textContent = "Hit";
+        aiGameboard.receiveAttack(ship, coordinates);
         playerScore++;
         h2Ai.innerHTML = `Human score: ` + `${playerScore}`;
-      } else if (aiCell.innerHTML !== "[object Object]") {
-        aiCell.style.pointerEvents = "none";
-        aiCell.style.opacity = "1";
-        aiCell.textContent = "miss";
-        aiCell.style.backgroundColor = "green";
+      } else {
+        aiCell.textContent = "Miss";
       }
 
       // trigger a random attack for the AI when an aiCell is clicked by the user
       while (true) {
         const randomX = Math.floor(Math.random() * 9);
         const randomY = Math.floor(Math.random() * 9);
-        const randomCoordinates = [randomX, randomY];
-        const humanShip = playerGameboard.grid[randomX][randomY];
         console.log(playerGameboard);
         const randomHumanCell = humanCells[randomX * 9 + randomY];
+
         if (!randomHumanCell.classList.contains("attacked")) {
-          const aiAttack = playerGameboard.receiveAttack(
-            humanShip,
-            randomCoordinates
-          );
           randomHumanCell.classList.add("attacked");
 
           // handle the result of the AI attack
-          if (aiAttack) {
-            if (randomHumanCell.style.backgroundColor === "lightblue") {
-              randomHumanCell.style.backgroundColor = "red";
-              aiScore++;
-              h2Player.innerHTML = `Ai score: ` + `${aiScore}`;
-              randomHumanCell.innerHTML = "ship";
-            } else if (randomHumanCell.style.backgroundColor !== "red") {
-              randomHumanCell.style.backgroundColor = "green";
-              randomHumanCell.innerHTML = "miss";
-            }
+          if (randomHumanCell.dataset.hasShip === "true") {
+            randomHumanCell.textContent = "Hit";
+            aiScore++;
+            h2Player.innerHTML = `Ai score: ` + `${aiScore}`;
+          } else {
+            randomHumanCell.textContent = "Miss";
           }
-
-          // if player's or ai's all ships are sunk,
-          if (playerGameboard.allSunk() || aiGameboard.allSunk()) {
-            gameOver();
-          }
+          break;
         }
-        // break out of the loop if the selected cell is already attacked
-        // to prevent infinite loop
-        break;
+      }
+
+      // if player's or ai's all ships are sunk,
+      if (playerGameboard.allSunk() || aiGameboard.allSunk()) {
+        gameOver();
       }
     });
-  }
-
-  // looping through all human cells
-  for (let i = 0; i < humanCells.length; i++) {
-    const humanCell = humanCells[i];
-
-    if (humanCell.innerHTML === "[object Object]") {
-      humanCell.style.backgroundColor = "lightblue";
-      humanCell.innerHTML = "";
-    }
-    // user cannot click on his own grid cells
-    humanCell.style.pointerEvents = "none";
   }
 
   function gameOver() {
@@ -138,10 +109,10 @@ export default function gameLoop() {
     if (playerGameboard.allSunk() || aiGameboard.allSunk()) {
       dialog.showModal();
       dialog.style.display = "flex";
-      if (aiGameboard.allSunk()) {
+      if (aiGameboard.allSunk() || playerScore === 44) {
         console.log("player wins");
         dialogText.textContent = "Game over. Player wins";
-      } else {
+      } else if (playerScore.allSunk() || computerScore === 44) {
         console.log("computer wins!");
         dialogText.textContent = "Game over. Ai wins";
       }

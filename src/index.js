@@ -88,16 +88,30 @@ export function createTable({ tableData, grid, isPlayer }) {
 
   tableData.forEach((rowData) => {
     const row = document.createElement("tr");
+
     rowData.forEach((cellData) => {
       const cell = document.createElement("td");
       if (isPlayer === true) {
         cell.className = "human-cells";
         table.id = "human-table";
+
+        if (typeof cellData === "object" && cellData !== null) {
+          cell.dataset.hasShip = "true";
+          cell.textContent = "Ship";
+        } else {
+          cell.textContent = cellData;
+        }
       } else if (isPlayer === false) {
         cell.className = "ai-cells";
         table.id = "ai-table";
+
+        if (typeof cellData === "object" && cellData !== null) {
+          cell.dataset.hasShip = "true";
+          cell.textContent = "";
+        } else {
+          cell.textContent = "";
+        }
       }
-      cell.appendChild(document.createTextNode(cellData));
       row.appendChild(cell);
     });
     tableBody.appendChild(row);
