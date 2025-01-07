@@ -1,70 +1,78 @@
-### Battleship
+## Battleship 🎮
 
-#### Description
+### Description
 
-- this project implements the classic game 'Battleship', that has 2 players, ruled grid on which each player's fleet of warships are marked. The locations of the fleets are concealed from the other player. Players alternate turns calling "shots" at the other player's ships, and the objective of the game is to destroy the opposing player's fleet.
+This project implements the classic game Battleship, a two-player game where each player places their fleet of warships on a ruled grid. The locations of each fleet are concealed from the opponent. Players take turns "firing shots" at the opponent's grid, and the objective is to destroy the opposing fleet before yours is destroyed.
 
-#### Technologies used
+### Technologies used
 
-#### Setup and installation
+- JavaScript (Vanilla): Core game logic and interactions
+- HTML, CSS: Structure and styling
+- Jest: Unit testing
+- ESLint, Prettier: Code linting and formatting
+  Webpack
 
-#### The game in action
+### Setup and installation
 
-- gif
+1. Clone the repository
+2. Install dependencies using `npm install`
+3. Run the server `npm run start`
+4. Open browser at http://localhost:8080
 
-#### Difficulties encountered
+### The game in action
 
-- `the most difficult part` of this project was definitely rendering the `2D Array` into the a table directly. Maybe my goal was set too high but I actually made it and it works smooth. (This stackOverflow helped me lots [StackOverflow](https://stackoverflow.com/questions/64284979/mapping-2d-array-javascript-into-html-table) by Vishnu Shenoy). Additional to it I have used an object for the parameters since I have more than two parameters to keep it organized. Thanks to [Carlos](https://github.com/bycdiaz) for the tip!
+![alt text](Battleship.gif)
 
-- checking if the ship coordinates are on board, are not repeating to have a doubled ship square and making sure that the backend is storing the right coordinate
+### Challenges faced
 
-#### General overlook of project progress
+1. Linking backend and frontend
+   Rendering a 2D array to an HTML table was a significant challenge. I found this [StackOverflow](https://stackoverflow.com/questions/64284979/mapping-2d-array-javascript-into-html-table) thread by Vishnu Shenoy particularly helpful
+   I structured game parameters as objects to manage the growing complexity of the game's logic, thanks to a tip from [Carlos](https://github.com/bycdiaz)
 
-- node output in the terminal of the `2D Array`, with 2 placed ships( 1 horizontally and 1 vertically), "x" marking the `fired shot` at that ship's square
+2. Ship placement validation
+   Ensuring valid ship placement by checking:
 
-(ship is showing 10x10 array but was too long to add everything in single picture)
+- Ships remain within the board's bounds
+- Ships do not overlap or occupy the same square multiple times
 
-![Alt text](image-1.png)
-
-#### Page setup sketch + ideas
+### Planning
 
 ![Alt text](image-4.png)
 
-#### Progress
+### Progress
+
+- Example of a 2D array with two placed ships (1 horizontal and 1 vertical).
+  "x" marks fired shots at those ship squares.
+
+![Alt text](image-1.png)
 
 ![Alt text](image-2.png)
+
+![alt text](image-8.png)
 
 ![Alt text](image-5.png)
 
 ![Alt text](image-3.png)
 
-![alt text](image-8.png)
+![Alt text](image-6.png)
 
-- if a cell was attacked it will give it a class `attacked`, so it will not be possible to attack it again. With a while loop, the ai is set to attack until it finds a cell that was not attacked for its turn
-  ![Alt text](image-6.png)
+#### Final
 
-After coming back to battleship after 1 year:
+![alt text](image-9.png)
 
-#### Improvements needed
+### Improvements needed
 
 - add a delay between player and ai move to make sure a move is not skipped
-
 - remove "[object object]" writing at ai table so player where the ship is / just change mouse style ✅
-
-![alt text](image-7.png)
-
-- change blue color for miss since dark writing is not very readable on a dark blue font
-
-- create reset button
-
-- enhance the ui with animations, transitions, visual feedback for hits, misses
+- make it prettier ✅
+- create reset button ✅
+- enhance the ui with animations, transitions, visual feedback for hits, misses ✅
 
 - deploy it
 
-##### Freeware, Non-Commercial Credits
+#### Freeware, Non-Commercial Credits
 
-Font: [Juvanze](https://www.fontspace.com/j-juvanze-font-f112038)
-
-Background image: [CraftPix.net 2D Game Assets](https://opengameart.org/users/craftpixnet-2d-game-assets)
-
-Xplosion Effect: [Placidplace](https://pixabay.com/users/placidplace-25572496/)
+- [Font](https://www.fontspace.com/j-juvanze-font-f112038)
+- [Background image](https://opengameart.org/users/craftpixnet-2d-game-assets)
+- [Xplosion Effect](https://pixabay.com/users/placidplace-25572496/)
+- [Crosshair](https://icons8.com/icons/set/crosshair)
