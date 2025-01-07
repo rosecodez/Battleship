@@ -71,17 +71,17 @@ export default function gameLoop() {
     });
 
     aiCell.addEventListener("click", (e) => {
+      if (aiCell.classList.contains("attacked")) {
+        // Ignore the click if the cell has already been attacked
+        return;
+      }
+
       // get coordinates on clicked cell
       const x = e.target.parentElement.rowIndex;
       const y = e.target.cellIndex;
       const coordinates = [x, y];
 
       const ship = aiGameboard.grid[x][y];
-
-      if (aiCell.classList.contains("attacked")) {
-        // Ignore the click if the cell has already been attacked
-        return;
-      }
 
       // give ai cell attacked classlist
       aiCell.classList.add("attacked");
@@ -126,9 +126,9 @@ export default function gameLoop() {
           randomHumanCell.classList.add("attacked");
 
           const ship = playerGameboard.grid[randomX][randomY];
-          const isHit = playerGameboard.receiveAttack(ship, [randomX, randomY]);
+          playerGameboard.receiveAttack(ship, [randomX, randomY]);
           randomHumanCell.textContent = "";
-          if (isHit) {
+          if (randomHumanCell.dataset.hasShip === "true") {
             const explosionGifAi = document.createElement("img");
             explosionGifAi.src = `${explosion}?t=${Date.now()}`;
             explosionGifAi.style.width = "60px";
