@@ -16,6 +16,7 @@ const aiGameboard = new Gameboard();
 
 // each player will have 4 ship x 1square, 3 ship x 4square, 3 ship x 2square
 // functions to place ships for player and ai
+
 export function createPlayerShips() {
   const playerOneSquareShip = new Ship(1);
   const playerOneSquareShipTwo = new Ship(1);

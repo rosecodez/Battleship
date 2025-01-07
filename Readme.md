@@ -38,6 +38,8 @@
 
 ![Alt text](image-3.png)
 
+![alt text](image-8.png)
+
 - if a cell was attacked it will give it a class `attacked`, so it will not be possible to attack it again. With a while loop, the ai is set to attack until it finds a cell that was not attacked for its turn
   ![Alt text](image-6.png)
 
