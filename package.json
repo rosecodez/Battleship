@@ -4,10 +4,8 @@
   "description": "Battleship",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "start": "webpack serve --mode development",
-    "test": "jest"
+    "test": "jest",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
