@@ -58,9 +58,7 @@ td {
 	background-position: bottom;
 }
 
-td.ai-cells {
-	cursor: alias;
-}
+
 table {
 	
 	border-collapse: collapse;
