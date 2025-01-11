@@ -187,7 +187,10 @@ export default function gameLoop() {
       } else if (playerGameboard.allSunk() || aiScore === 22) {
         console.log("ai wins!");
         dialogText.textContent = "Game over. Ai wins";
-      } else if (playerScore === aiScore) {
+      } else if (
+        playerScore === aiScore ||
+        (playerGameboard.allSunk() && aiGameboard.allSunk())
+      ) {
         console.log("its a tie!");
         dialogText.textContent = "It's a tie!";
       }
