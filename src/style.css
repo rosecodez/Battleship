@@ -50,9 +50,7 @@ h2 {
 table, td, th {
 	border: 1px solid;
 }
-#ai-cells {
-	display: none;
-}
+
 td {
 	background-image: url("./images/21-48-10-87_512.webp"); 
 	background-position: bottom;
@@ -77,7 +75,6 @@ td {
 	display: inline-block;
 	padding: 15px 25px;
 	font-size: 24px;
-	cursor: pointer;
 	text-align: center;
 	text-decoration: none;
 	outline: none;

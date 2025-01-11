@@ -117,18 +117,21 @@ export default function gameLoop() {
         aiCell.textContent = "Miss";
       }
 
+      // ai logic
       // trigger a random attack for the AI when an aiCell is clicked by the user
       while (true) {
-        const randomX = Math.floor(Math.random() * 9);
-        const randomY = Math.floor(Math.random() * 9);
-        const randomHumanCell = humanCells[randomX * 9 + randomY];
+        const randomX = Math.floor(Math.random() * 10);
+        const randomY = Math.floor(Math.random() * 10);
+        const randomHumanCell = humanCells[randomX * 10 + randomY];
+        const aiAttackCoordinates = [randomX, randomY];
+        const ship = playerGameboard.grid[randomX][randomY];
 
         if (!randomHumanCell.classList.contains("attacked")) {
           randomHumanCell.classList.add("attacked");
 
-          const ship = playerGameboard.grid[randomX][randomY];
-          playerGameboard.receiveAttack(ship, [randomX, randomY]);
+          playerGameboard.receiveAttack(ship, aiAttackCoordinates);
           randomHumanCell.textContent = "";
+
           if (randomHumanCell.dataset.hasShip === "true") {
             const explosionGifAi = document.createElement("img");
             explosionGifAi.src = `${explosion}?t=${Date.now()}`;
@@ -147,7 +150,6 @@ export default function gameLoop() {
           } else {
             randomHumanCell.textContent = "Miss";
           }
-
           break;
         }
       }
@@ -164,21 +166,30 @@ export default function gameLoop() {
     if (dialog.open) {
       return;
     }
+
     // remove attacked class from ai cells
     for (let i = 0; i < aiCells.length; i++) {
       aiCells[i].classList.remove("attacked");
     }
 
     // Check if either player or AI has all ships sunk
-    if (playerGameboard.allSunk() || aiGameboard.allSunk()) {
+    if (
+      playerGameboard.allSunk() ||
+      aiGameboard.allSunk() ||
+      playerScore === aiScore
+    ) {
       dialog.showModal();
       dialog.style.display = "flex";
-      if (aiGameboard.allSunk() || playerScore === 44) {
+
+      if (aiGameboard.allSunk() || playerScore === 22) {
         console.log("player wins");
         dialogText.textContent = "Game over. Player wins";
-      } else if (playerScore.allSunk() || computerScore === 44) {
-        console.log("computer wins!");
+      } else if (playerGameboard.allSunk() || aiScore === 22) {
+        console.log("ai wins!");
         dialogText.textContent = "Game over. Ai wins";
+      } else if (playerScore === aiScore) {
+        console.log("its a tie!");
+        dialogText.textContent = "It's a tie!";
       }
 
       restartButton.addEventListener("click", restartGame);
