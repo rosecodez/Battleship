@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Battleship</title>
+  </head>
+  <body>
+    <script src="main.js" defer></script>
+
+    <section id="header">
+      <h1>Battleship</h1>
+    </section>
+
+    <button id="resetGameBtn">Reset</button>
+
+    <section id="content">
+      <div id="human">
+        <h2 id="h2-player">Human table</h2>
+        <div class="grid" id="human-grid"></div>
+      </div>
+      <div id="ai">
+        <h2 id="h2-ai">Ai table</h2>
+        <div class="grid" id="ai-grid"></div>
+      </div>
+    </section>
+
+    <section id="footer">
+      <p>The Odin Project © 2024</p>
+    </section>
+
+    <div id="dialog-container">
+      <dialog>
+        <p id="end-text"></p>
+        <button id="restart-button">Restart</button>
+      </dialog>
+    </div>
+  </body>
+</html>
