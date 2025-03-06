@@ -1,5 +1,7 @@
 ## Battleship
 
+**Live Project**: https://rosecodez.github.io/Battleship/
+
 This project is a single-player version of the classic _Battleship_ game, where the player faces off against an AI. The player’s fleet of warships is placed on a grid, and the AI's fleet is hidden. Players take turns firing shots at the opponent's grid, with the objective being to destroy the opposing fleet before their own is sunk.
 
 ### Demo
@@ -57,10 +59,10 @@ Ensuring that ships are placed correctly was crucial.
   **UI Enhancements**:
 
 - Remove "[object object]" writing at ai table so player where the ship is / just change mouse style ✅
-- Make the UI more visually appealing with a more polished design.
-- **Reset Button**: Implement a reset button to allow players to restart the game
+- Make the **UI more visually appealing** with a more polished design. ✅
+- **Reset Button**: Implement a reset button to allow players to restart the game ✅
 
-- **Animations and Transitions**: Improve the UI with animations and transitions for better visual feedback on hits and misses.
+- **Animations and Transitions**: Improve the UI with animations and transitions for better visual feedback on hits and misses. ✅
 
 - **Deploy** ✅
 
