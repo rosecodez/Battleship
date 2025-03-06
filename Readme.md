@@ -53,13 +53,16 @@ Ensuring that ships are placed correctly was crucial.
 ### Improvements needed
 
 - **AI Move Delay**: Add a delay between the player’s and AI's moves to ensure the AI doesn’t skip its turn
+
   **UI Enhancements**:
+
 - Remove "[object object]" writing at ai table so player where the ship is / just change mouse style ✅
 - Make the UI more visually appealing with a more polished design.
-  **Reset Button**: Implement a reset button to allow players to restart the game
-  **Animations and Transitions**: Improve the UI with animations and transitions for better visual feedback on hits and misses.
+- **Reset Button**: Implement a reset button to allow players to restart the game
 
-**Deploy** ✅
+- **Animations and Transitions**: Improve the UI with animations and transitions for better visual feedback on hits and misses.
+
+- **Deploy** ✅
 
 #### Freeware, Non-Commercial Credits
 
